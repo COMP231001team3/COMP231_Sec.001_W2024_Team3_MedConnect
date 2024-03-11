@@ -20,3 +20,4 @@ The following dependencies are installed:
 + morgan: HTTP request logger middleware
 + body-parser: to handle HTTP POST requests where you need to access data submitted from forms or clients
 + method-override: for working with RESTful APIs
++ compression: for faster responses
