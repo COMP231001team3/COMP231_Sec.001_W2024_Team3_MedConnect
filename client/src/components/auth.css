@@ -1,0 +1,53 @@
+.container {
+    width: 50%;
+    padding-top: 10%;
+}
+
+.containerAlign {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.register{
+    padding-top: 20%;
+}
+
+.signUpForm {
+    background-color: #4CCD99;
+    border-radius: 8px;
+}
+
+.signUpH3 {
+    color: #F8F5E4;
+}
+
+.signUpButton {
+  color: #4CCD99;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  background-color: #FFF;
+  cursor: pointer;
+  letter-spacing: 2px;
+
+}
+button {
+  color: #F8F5E4;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  background-color: #4CCD99;
+  cursor: pointer;
+  letter-spacing: 2px;
+}
+
+form{
+    padding: 10%;
+}
+
+h3 {
+    color: #4CCD99;
+    text-align: center;
+    padding: 3%;
+}
