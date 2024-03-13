@@ -1,1 +1,58 @@
-//code
+//Iuliia Chugunova
+//Schema of doctor. Defines data structure, allows connections to database and CRUD operations 
+
+const mongoose = require('mongoose');
+
+const doctorSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    description: 'Name of the doctor'
+  },
+  specialization: {
+    type: String,
+    required: true,
+    description: 'Specialization of the doctor'
+  },
+  email: {
+    type: String,
+    required: true,
+    match: /^\S+@\S+\.\S+$/,
+    description: 'Email address of the doctor'
+  },
+  phone: {
+    type: String,
+    required: true,
+    match: /^\+?\d{1,3}-?\d{3}-?\d{3}-?\d{4}$/,
+    description: 'Phone number of the doctor'
+  },
+  password: {
+    type: String,
+    required: true,
+    description: 'Password of the doctor'
+  },
+  address: {
+    type: String,
+    description: 'Address of the doctor'
+  },
+  availability: {
+    type: [{
+      day: { type: String, required: true },
+      time: { type: String, required: true }
+    }],
+    description: 'Availability schedule of the doctor'
+  },
+  rating: {
+    type: Number,
+    min: 0,
+    max: 5,
+    description: 'Rating of the doctor (from 0 to 5)'
+  },
+  reviews: [{
+    reviewer: { type: String, required: true },
+    comment: { type: String, required: true },
+    rating: { type: Number, required: true, min: 0, max: 5 }
+  }]
+});
+
+module.exports = mongoose.model('Doctor', doctorSchema);
