@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react"; 
-import './login.css';
+import './auth.css';
 
 function LoginForm(){
     const {
