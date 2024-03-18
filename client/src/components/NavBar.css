@@ -1,0 +1,37 @@
+.navbar{
+  width: 100%;
+  height: 160px;
+  background-color:  #87E3C2;
+}
+
+.navImg{
+  margin-left: 100px;
+  margin-top: 70px;
+}
+
+.navcontainer{
+  display: flex;
+  list-style: none;
+}
+
+.navbar-nav{
+     list-style: none;
+}
+
+.navdivitens {
+  display: flex; 
+  margin-right: 20px;
+  margin-top: 70px;
+  margin-left: 700px;
+}
+
+.nav-link {
+  margin-right: 90px;
+  font-size: 1.4rem;
+  color: blue;
+}
+
+.nav-link:hover {
+  color: darkblue; 
+  text-decoration: none;
+}
