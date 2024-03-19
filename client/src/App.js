@@ -8,6 +8,7 @@ import SignUp from './components/signup.jsx'
 function App() {
   return (
     <div className="App">
+      <p> Hello, Front-end!</p>
       <Router>
         <Routes>
           <Route path="/sign-in" element={ <Login /> } />
