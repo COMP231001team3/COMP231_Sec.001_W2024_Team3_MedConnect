@@ -53,7 +53,7 @@ const AppointmentBooking = () => {
         </select>
     </div>
     <button onClick={handleSubmit} className="bookButton" disabled={!startDate || !selectedTimeSlot}>
-        Book Appointment
+        Book Appointment Here
       </button>
   </div>
   );
