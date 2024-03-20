@@ -21,3 +21,4 @@ The following dependencies are installed:
 + body-parser: to handle HTTP POST requests where you need to access data submitted from forms or clients
 + method-override: for working with RESTful APIs
 + compression: for faster responses
++ nodemon: for updating server and page when changes are made

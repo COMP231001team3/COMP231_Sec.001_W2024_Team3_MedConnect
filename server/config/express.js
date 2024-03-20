@@ -21,9 +21,8 @@ app.use(methodOverride('_method'));
 // Middleware to compress responses
 app.use(compression());
 
-// Define the path to serve static files (e.g., frontend build files)
-const staticPath = path.join(__dirname, '../../client/build'); // Adjust the path based on your project structure
-
+// Define the path to serve static files 
+const staticPath = path.join(__dirname, '../../client/build'); 
 // Serve static files
 app.use(express.static(staticPath));
 
