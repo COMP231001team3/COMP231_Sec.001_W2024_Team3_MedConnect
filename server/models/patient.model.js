@@ -1,6 +1,7 @@
 //Iuliia Chugunova
 //Schema of patient. Defines data structure, allows connections to database and CRUD operations 
 
+const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 
 const patientSchema = new mongoose.Schema({
@@ -8,6 +9,10 @@ const patientSchema = new mongoose.Schema({
     type: String,
     required: true,
     description: 'Name of the patient'
+  },
+  role: {
+    type: String,
+    description: 'User role'
   },
   email: {
     type: String,
@@ -17,7 +22,6 @@ const patientSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    required: true,
     match: /^\+?\d{1,3}-?\d{3}-?\d{3}-?\d{4}$/,
     description: 'Phone number of the patient'
   },
@@ -30,45 +34,47 @@ const patientSchema = new mongoose.Schema({
     required: true,
     description: 'Password of the patient'
   },
-  role: {
-    type: String,
-    required: true,
-    description: 'User role(patient, doctor or receptionist)'
+  documents: {
+    type: [{
+      type: {
+        type: String,
+        required: true,
+        description: 'Type of document (e.g., medical report, prescription)'
+      },
+      filename: {
+        type: String,
+        required: true,
+        description: 'Name of the uploaded file'
+      },
+      uploadedAt: {
+        type: Date,
+        required: true,
+        description: 'Date and time when the document was uploaded'
+      },
+      description: {
+        type: String,
+        description: 'Optional description or comments about the document'
+      }
+    }],
+    description: 'Array of documents related to the patient'
   },
-  documents: [{
-    type: {
-      type: String,
-      required: true,
-      description: 'Type of document (e.g., medical report, prescription)'
-    },
-    filename: {
-      type: String,
-      required: true,
-      description: 'Name of the uploaded file'
-    },
-    uploadedAt: {
-      type: Date,
-      required: true,
-      description: 'Date and time when the document was uploaded'
-    },
-    description: {
-      type: String,
-      description: 'Optional description or comments about the document'
-    }
-  }],
-  medicalHistory: [{
-    condition: {
-      type: String,
-      required: true,
-      description: 'Medical condition of the patient'
-    },
-    diagnosis: {
-      type: String,
-      required: true,
-      description: 'Diagnosis related to the medical condition'
-    }
-  }]
+  medicalHistory: {
+    type: [{
+      condition: {
+        type: String,
+        required: true,
+        description: 'Medical condition of the patient'
+      },
+      diagnosis: {
+        type: String,
+        required: true,
+        description: 'Diagnosis related to the medical condition'
+      }
+    }],
+    description: 'Array of medical history entries for the patient'
+  }
 });
+
 
 //hash password before saving to the database
 patientSchema.pre('save', async function (next) {
