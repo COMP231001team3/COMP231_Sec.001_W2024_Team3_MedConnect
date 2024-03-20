@@ -24,6 +24,11 @@ const receptionistSchema = new mongoose.Schema({
     type: String,
     required: true,
     description: 'Password of the receptionist'
+  },
+  role: {
+    type: String,
+    required: true,
+    description: 'User role(patient, doctor or receptionist)'
   }
 });
 

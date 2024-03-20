@@ -6,9 +6,11 @@ const compression = require('compression');
 const path = require('path'); // Include the path module
 
 const bcrypt = require('bcryptjs');
-const { Doctor } = require('./models/doctor.model.js');
-const { Patient } = require('./models/patient.model.js');
-const { Receptionist } = require('./models/receptionist.model.js');
+const { Doctor } = require('../models/doctor.model.js');
+const { Patient } = require('../models/patient.model.js');
+const { Receptionist } = require('../models/receptionist.model.js');
+
+const { env } = require('process');
 
 // Create an Express application
 const app = express();

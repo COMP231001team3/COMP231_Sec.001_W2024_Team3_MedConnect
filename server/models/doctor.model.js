@@ -35,6 +35,11 @@ const doctorSchema = new mongoose.Schema({
     type: String,
     description: 'Address of the doctor'
   },
+  role: {
+    type: String,
+    required: true,
+    description: 'User role(patient, doctor or receptionist)'
+  },
   availability: {
     type: [{
       day: { type: String, required: true },

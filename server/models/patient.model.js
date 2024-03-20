@@ -30,6 +30,11 @@ const patientSchema = new mongoose.Schema({
     required: true,
     description: 'Password of the patient'
   },
+  role: {
+    type: String,
+    required: true,
+    description: 'User role(patient, doctor or receptionist)'
+  },
   documents: [{
     type: {
       type: String,
