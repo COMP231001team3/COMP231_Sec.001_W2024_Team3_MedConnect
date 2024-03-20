@@ -65,4 +65,20 @@ const patientSchema = new mongoose.Schema({
   }]
 });
 
+//hash password before saving to the database
+patientSchema.pre('save', async function (next) {
+  //hash the password only if it's modified or new
+  if (!this.isModified('password')) {
+    return next();
+  }
+
+  try {
+    const hashedPassword = await bcrypt.hash(this.password, 10);
+    this.password = hashedPassword;
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = mongoose.model('Patient', patientSchema);

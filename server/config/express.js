@@ -5,6 +5,11 @@ const methodOverride = require('method-override');
 const compression = require('compression');
 const path = require('path'); // Include the path module
 
+const bcrypt = require('bcryptjs');
+const { Doctor } = require('./models/doctor.model.js');
+const { Patient } = require('./models/patient.model.js');
+const { Receptionist } = require('./models/receptionist.model.js');
+
 // Create an Express application
 const app = express();
 
