@@ -1,7 +1,12 @@
 //Jayson Tuazon
+<<<<<<< Updated upstream
 //routes/patientRoutes.js
 //Provides routes related to patient to perform GET operations
 
+=======
+//routes/doctorRoutes.js
+//Provides routes related to patient to perform GET operations
+>>>>>>> Stashed changes
 const express = require('express');
 const router = express.Router();
 const doctorController = require('../controllers/doctorController');

@@ -1,7 +1,12 @@
 //Jayson Tuazon
+<<<<<<< Updated upstream
 //controllers/doctorController.js
 //Defines GET operations of Doctor Profile and Schedule
 
+=======
+//controllers/patientController.js
+//Defines GET operations
+>>>>>>> Stashed changes
 const { Doctor } = require('../models/doctor.model');
 
 // Controller function to get doctor profile
