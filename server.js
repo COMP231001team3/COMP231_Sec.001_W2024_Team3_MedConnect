@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 //Import routes
 const patientRoutes = require('./server/routes/patientRoute');
+const doctorRoutes = require('./server/routes/doctorRoutes');
 
 //Import mongodb module
 let mongoose = require('mongoose')
@@ -25,6 +26,8 @@ const mongoURI = process.env.MONGODB_URI
 
 // Mount patient routes
 app.use('/patients', patientRoutes);
+// Mount doctor routes
+app.use('/doctors', doctorRoutes);
 
 // Connecting to database
 mongoose.connect(mongoURI).then(() => {
