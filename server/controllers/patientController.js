@@ -3,7 +3,11 @@
 //Defines CRUD operations
 
 const bcrypt = require('bcryptjs');
+const express = require('express');
+const mongoose = require('mongoose');
 const Patient = require('../models/patient.model.js');
+
+mongoose.Promise = global.Promise
 
 // Retrieve all patients
 exports.getAllPatients = async (req, res) => {

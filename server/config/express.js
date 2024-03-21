@@ -2,36 +2,51 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
-const compression = require('compression');
+const compress = require('compression');
 const path = require('path'); // Include the path module
 
 const bcrypt = require('bcryptjs');
-const { Doctor } = require('../models/doctor.model.js');
-const { Patient } = require('../models/patient.model.js');
-const { Receptionist } = require('../models/receptionist.model.js');
+const doctorRoutes = require('../routes/doctorRoute');
+const patientRoutes = require('../routes/patientRoute');
 
 const { env } = require('process');
 
-// Create an Express application
-const app = express();
+module.exports = function () {
+    var app = express();
+    if (process.env.NODE_ENV === 'development') {
+        app.use(morgan('dev'));
+    } else if (process.env.NODE_ENV === 'production') {
+        app.use(compress());
+    }
+    const corsOptions ={
+        origin:'*', 
+        credentials:true,
+        optionSuccessStatus:200
+    }
+    app.use(cors(corsOptions));
 
-// Middleware to enable CORS
-app.use(cors());
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(methodOverride());
 
-// Middleware to parse incoming request bodies
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// Middleware to override HTTP methods
-app.use(methodOverride('_method'));
-
-// Middleware to compress responses
-app.use(compression());
+    app.use(express.static("node_modules"));
+    app.use('/patients', patientRoutes);
+    app.use('/doctors', doctorRoutes);
+    __dirname = path.resolve();
+    if(process.env.NODE_ENV==='production'){
+        app.use(express.static(path.join(__dirname, "/frontend/build")));
+        app.get('*',(req,res) => {
+            res.sendFile(path.resolve(__dirname,'frontend','build','index.html'))
+        })
+    }
+    return app;
+};
 
 // Define the path to serve static files 
-const staticPath = path.join(__dirname, '../../client/build'); 
+//const staticPath = path.join(__dirname, '../../client/build'); 
+
 // Serve static files
-app.use(express.static(staticPath));
+//app.use(express.static(staticPath));
 
 // Export the Express application
-module.exports = app;
+//module.exports = app;

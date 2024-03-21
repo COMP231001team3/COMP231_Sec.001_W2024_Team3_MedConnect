@@ -2,7 +2,11 @@
 //Defines CRUD operations on doctor data
 
 const bcrypt = require('bcryptjs');
+const express = require('express');
+const mongoose = require('mongoose');
 const Doctor = require('../models/doctor.model');
+
+mongoose.Promise = global.Promise
 
 //retrieve all doctors
 exports.getAllDoctors = async (req, res) => {
@@ -57,9 +61,9 @@ exports.createDoctor = async (req, res) => {
         });
 
         // Save the doctor to the database
-        await newDoctor.save();
+        const savedDoctor = await newDoctor.save();
 
-        res.status(201).json({ message: 'Doctor registered successfully' });
+        res.status(201).json({ message: 'Doctor registered successfully:'+ savedDoctor });
     } catch (error) {
         console.error('Error registering doctor:', error);
         res.status(500).json({ error: 'An error occurred while registering doctor' });
