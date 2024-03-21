@@ -45,7 +45,7 @@ exports.updatePatientById = async (req, res) => {
   }
 };
 
-//create new user
+//create new patient
 exports.registerPatient = async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -64,9 +64,11 @@ exports.registerPatient = async (req, res) => {
 
         // Create a new patient document
         const newPatient = new Patient({
-            name,
-            email,
-            password: hashedPassword
+          name,
+          email,
+          password: hashedPassword,
+          role,
+          phone
         });
 
         // Save the patient to the database

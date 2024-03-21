@@ -1,6 +1,7 @@
 //Iuliia Chugunova
 //Schema of doctor. Defines data structure, allows connections to database and CRUD operations 
 
+const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 
 const doctorSchema = new mongoose.Schema({

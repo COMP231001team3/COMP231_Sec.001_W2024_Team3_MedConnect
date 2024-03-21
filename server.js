@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 //Import routes
 const patientRoutes = require('./server/routes/patientRoute');
+const doctorRoutes = require('./server/routes/doctorRoute');
 
 //Import mongodb module
 let mongoose = require('mongoose')
@@ -26,6 +27,9 @@ const mongoURI = process.env.MONGODB_URI
 // Mount patient routes
 app.use('/patients', patientRoutes);
 
+// Mount doctor routes
+app.use('/doctors', doctorRoutes);
+
 // Connecting to database
 mongoose.connect(mongoURI).then(() => {
     console.log('db has connected!')
@@ -43,7 +47,7 @@ if(process.env.NODE_ENV==='production'){
 }
 
 // Start the Express server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
