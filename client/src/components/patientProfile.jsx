@@ -20,7 +20,7 @@ function PatientProfile() {
           <h2>Patient Profile</h2>
           <div className='patientInf'>
             <p>Informations:</p>
-            <img src={profileImage}  alt="picture" width="150" height="100" className="d-inline-block align-text-top mb-3" />
+            <img src={profileImage}  alt="Profile image" width="150" height="100" className="d-inline-block align-text-top mb-3" />
             <p>Name:</p>
             <p>Email:</p>
             <p>Birthday</p>

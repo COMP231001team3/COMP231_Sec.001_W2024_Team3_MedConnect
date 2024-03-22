@@ -14,9 +14,8 @@ import DoctorProfile from './components/doctorProfile.jsx';
 import ReceptionistProfile from './components/receptionistProfile.jsx';
 import AppointmentBooking from './components/appointmentBooking.jsx';
 import DoctorProfileForUser from './components/doctorProfileForUser.jsx';
-
-
-
+import ReceptionistProfile from './components/receptionistProfile.jsx';
+import DoctorProfile from './components/doctorProfile.jsx';
 
 
 function App() {
@@ -30,11 +29,11 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/"        element={<HomePage/>} />  
           <Route path="/ListDoctors" element={<ListDoctors />} />
-          <Route path="/patientProfile" element={<PatientProfile />} /> 
-          <Route path="/doctorProfile" element={<DoctorProfile />} /> 
-          <Route path="/receptionistProfile" element={<ReceptionistProfile />} /> 
+          <Route path="/patientProfile" element={<PatientProfile />} />  
           <Route path="/bookAppointment" element={<AppointmentBooking />} />
-          <Route path="/doctorProfile" element={<DoctorProfileForUser />} /> 
+          <Route path="/doctorProfileForUser" element={<DoctorProfileForUser />} /> 
+          <Route path="/receptionistProfile" element={<ReceptionistProfile />} />
+          <Route path="/doctorProfile" element={<DoctorProfile />} />
         </Routes>
         <Footer/>
       </Router>
@@ -43,3 +42,4 @@ function App() {
 }
 
 export default App;
+
