@@ -11,13 +11,7 @@ import HomePage from './components/homePage.jsx'
 import ListDoctors from './components/listDoctors.jsx'
 import PatientProfile from './components/patientProfile.jsx'
 import AppointmentBooking from './components/appointmentBooking.jsx';
-<<<<<<< HEAD
 import DoctorProfileForUser from './components/doctorProfileForUser.jsx';
-=======
-import ReceptionistProfile from './components/receptionistProfile.jsx';
-import DoctorProfile from './components/doctorProfile.jsx';
-
->>>>>>> c61f39b3378762c8c87640b72215852ed645c63c
 
 
 
