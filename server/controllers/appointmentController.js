@@ -1,11 +1,12 @@
 //Iuliia Chugunova
 //Defines CRUD operations on appointment data
-
+/*
 const Appointment = require('../models/appointment.model');
 const Doctor = require('../models/doctor.model');
 const Patient = require('../models/patient.model')
 
 // function to create a new appointment
+/*
 exports.createAppointment = async (req, res) => {
     try {
         // Extract appointment details from the request body
@@ -42,7 +43,8 @@ exports.createAppointment = async (req, res) => {
         return res.status(500).json({ message: 'Internal server error' });
     }
 };
-
+*/
+/*
 //function to get appointment by ID
 exports.getAppointmentById = async (req, res) => {
   try {
@@ -84,3 +86,4 @@ exports.deleteAppointment = async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
+*/ 

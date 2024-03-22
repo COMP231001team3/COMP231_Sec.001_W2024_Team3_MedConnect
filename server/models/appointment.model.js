@@ -1,9 +1,10 @@
 //Iuliia Chugunova
 //Schema of appointments. Defines data structure, allows connections to database and CRUD operations 
-
+/*
 const mongoose = require('mongoose');
 const Doctor = require('../models/doctor.model');
 const Patient = require('../models/patient.model')
+
 
 const appointmentSchema = new mongoose.Schema({
   patientId: {
@@ -37,3 +38,4 @@ const appointmentSchema = new mongoose.Schema({
 const Appointment = mongoose.model('Appointment', appointmentSchema);
 
 module.exports = Appointment;
+*/
