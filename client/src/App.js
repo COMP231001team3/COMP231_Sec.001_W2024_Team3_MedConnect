@@ -16,7 +16,6 @@ import ReceptionistProfile from './components/receptionistProfile.jsx';
 import DoctorProfile from './components/doctorProfile.jsx';
 
 
-
 function App() {
   return (  
     <div className="App">
@@ -41,3 +40,4 @@ function App() {
 }
 
 export default App;
+
