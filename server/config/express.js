@@ -9,7 +9,7 @@ const bcrypt = require('bcryptjs');
 //Import routes
 const doctorRoutes = require('../routes/doctorRoute');
 const patientRoutes = require('../routes/patientRoute');
-//const appointmentRoutes = require('../routes/appointmentRoute');
+const appointmentRoutes = require('../routes/appointmentRoute');
 
 const { env } = require('process');
 
@@ -36,7 +36,7 @@ module.exports = function () {
     //mount routes
     app.use('/patients', patientRoutes);
     app.use('/doctors', doctorRoutes);
-    //app.use('/appointments', appointmentRoutes);
+    app.use('/appointments', appointmentRoutes);
 
     __dirname = path.resolve();
     if(process.env.NODE_ENV==='production'){

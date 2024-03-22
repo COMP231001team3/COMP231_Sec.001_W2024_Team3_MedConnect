@@ -10,6 +10,8 @@ import Footer from './components/footer.jsx'
 import HomePage from './components/homePage.jsx'
 import ListDoctors from './components/listDoctors.jsx'
 import PatientProfile from './components/patientProfile.jsx'
+import DoctorProfile from './components/doctorProfile.jsx';
+import ReceptionistProfile from './components/receptionistProfile.jsx';
 import AppointmentBooking from './components/appointmentBooking.jsx';
 import DoctorProfileForUser from './components/doctorProfileForUser.jsx';
 

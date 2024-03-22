@@ -1,24 +1,23 @@
 //Iuliia Chugunova
 //Defines routes for specific CRUD operation
-/*
+
 const express = require('express');
 const router = express.Router();
 const appointmentController = require('../controllers/appointmentController');
 
-// Route to create appointment
+// Create a new appointment
 router.post('/', appointmentController.createAppointment);
 
-// Route to get list of appointments
+// Get all appointments
 router.get('/', appointmentController.getAppointments);
 
-//route to get particular appointment
+// Get appointment by ID
 router.get('/:id', appointmentController.getAppointmentById);
 
-//route to edit particular appointment
+// Update appointment by ID
 router.put('/:id', appointmentController.updateAppointment);
 
-// route to delete particular appointment
+// Delete appointment by ID
 router.delete('/:id', appointmentController.deleteAppointment);
 
 module.exports = router;
-*/
