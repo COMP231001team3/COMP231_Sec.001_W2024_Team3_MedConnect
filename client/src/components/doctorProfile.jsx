@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './patientProfile.css';
+import profileImage from './profile.jpg';
 
 function PatientProfile() {
   return (
@@ -11,15 +12,12 @@ function PatientProfile() {
       </div>
       <div className='containerProfile'>
         <div className='profile'>
-          <h2>DOCTOR Profile</h2>
+          <h2>Doctor Profile</h2>
           <div className='patientInf'>
             <p>Informations:</p>
-            <img src=" "alt="picture" width="150" height="100" className="d-inline-block align-text-top mb-3" />
+            <img src={profileImage} alt="Profile image" width="150" height="100" className="d-inline-block align-text-top mb-3" />
             <p>Name:</p>
             <p>Email:</p>
-            <p>Birthday</p>
-            <p>Cell:</p>
-            <p>Address:</p>
           </div>
           <div className='options'>
             <button className="btn">View and Edit Profile</button>

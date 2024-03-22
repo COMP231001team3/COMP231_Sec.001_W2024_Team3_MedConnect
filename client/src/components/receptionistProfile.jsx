@@ -1,8 +1,9 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './patientProfile.css';
+import profileImage from './profile.jpg';
 
-function PatientProfile() {
+function ReceptionistProfile() {
   return (
     <section className='patientProfile'>
       <div className='bar'>
@@ -14,7 +15,7 @@ function PatientProfile() {
           <h2>Receptionist Profile</h2>
           <div className='patientInf'>
             <p>Informations:</p>
-            <img src=" "alt="picture" width="150" height="100" className="d-inline-block align-text-top mb-3" />
+            <img src={profileImage} alt="Profile image" width="150" height="100" className="d-inline-block align-text-top mb-3" />
             <p>Name:</p>
             <p>Email:</p>
           </div>
@@ -29,4 +30,4 @@ function PatientProfile() {
   );
 }
 
-export default PatientProfile;
+export default ReceptionistProfile;

@@ -13,7 +13,7 @@ function DoctorProfileForUser() {
       <section className='containerDoctorProfileForUser'>
       <div className='doctorprofileTitle'><h3>Doctor profile</h3> </div>
       <div className='doctorprofile'> 
-       <img src={profileImage} alt="Imagem de perfil"/>
+       <img src={profileImage} alt="Profile Image"/>
       <ul>
       <li> <h2>Doctor Name</h2></li>
        <li> Location: </li>
