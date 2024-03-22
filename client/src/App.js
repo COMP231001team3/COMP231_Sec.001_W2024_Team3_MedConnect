@@ -1,5 +1,5 @@
 import React from 'react'
-import '../bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Login from './components/login.jsx'
@@ -8,10 +8,10 @@ import NavBar from './components/NavBar.jsx'
 import Header from './components/header.jsx' 
 import Footer from './components/footer.jsx'
 import HomePage from './components/homePage.jsx'
-import SearchResult from './components/searchResult.jsx'
+import ListDoctors from './components/listDoctors.jsx'
 import PatientProfile from './components/patientProfile.jsx'
 import AppointmentBooking from './components/appointmentBooking.jsx';
-
+import DoctorProfileForUser from './components/doctorProfileForUser.jsx';
 
 
 
@@ -27,9 +27,10 @@ function App() {
           <Route path="/sign-in" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/"        element={<HomePage/>} />  
-          <Route path="/searchResult" element={<SearchResult />} />
+          <Route path="/ListDoctors" element={<ListDoctors />} />
           <Route path="/patientProfile" element={<PatientProfile />} /> 
           <Route path="/bookAppointment" element={<AppointmentBooking />} />
+          <Route path="/doctorProfile" element={<DoctorProfileForUser />} /> 
         </Routes>
         <Footer/>
       </Router>

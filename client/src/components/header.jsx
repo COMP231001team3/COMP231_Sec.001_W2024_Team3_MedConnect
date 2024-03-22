@@ -2,6 +2,9 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './header.css';
 
+
+{/*the header of the application where there is a search bar*/}
+
 function Header() {
   return (
     <header className="header">

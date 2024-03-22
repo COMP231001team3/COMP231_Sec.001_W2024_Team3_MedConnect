@@ -1,0 +1,112 @@
+.doctorprofileTitle h3{
+  height: 90px;
+  width: 100%;
+  margin-top: 70px;
+}
+
+.doctorprofile {
+  height: 340px;
+  width: 60%;
+  display: flex;
+ margin-left: 400px;
+ margin-top: 70px;
+}
+
+.doctorprofile img{
+  width: 35%;
+  height: 75%;
+  margin-top: 5px;
+  margin-left: 60px;
+}
+
+.doctorprofile h3{
+  margin-top: 45px;
+  margin-left: 140px;
+}
+
+
+.doctorprofile ul {
+  list-style-type: none;
+  text-align: left;
+  margin-left: 150px;
+}
+
+
+
+.bookAppointment{
+  height: 90px;
+  width: 60%;
+  display: flex;
+  background-color: gray;
+  margin-left: 400px;
+}
+
+.bookAppointmentTitle{
+  height: 90px;
+  width: 100%;
+
+}
+
+
+.bookAppointment p{
+  color: white;
+  font-size: 1.1rem;
+  margin-top: 30px;
+  margin-left: 400px;
+
+} 
+
+.clinicAddress {
+  height: 650px;
+  width: 60%;
+  margin-left: 400px;
+
+}
+
+
+.clinicAddress ul{
+ list-style-type: none;
+ text-align: left;
+}
+
+.clinicAddress h3{
+  text-align: left;
+ }
+
+ .clinicAddress button{
+  margin-right: 900px;
+ }
+ 
+ .reviews{
+  height: 320px;
+  width: 80%;
+  margin-bottom: 120px;
+  margin-left: 140px;
+  display: flex;
+ }
+
+ .reviews h3{
+  margin-left: 25px;
+  margin-top: 0px; 
+}
+ 
+ .reviews img{
+  height: 80px;
+  width: 70px;
+  margin-left: 60px;
+ margin-top: 130px;
+ }
+
+ .reviews p{
+  height: 80px;
+  width: 70px;
+  margin-left: 60px;
+ margin-top: 130px;
+ }
+
+ .reviews ul{
+  list-style-type: none;
+  margin-left: 60px;
+ margin-top: 130px;
+ font-size: 1.2rem;
+}

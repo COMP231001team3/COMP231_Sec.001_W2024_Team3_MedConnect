@@ -1,12 +1,12 @@
 .navbar{
   width: 100%;
-  height: 160px;
+  height: 200px;
   background-color:  #87E3C2;
 }
 
 .navImg{
-  margin-left: 100px;
-  margin-top: 70px;
+  margin-left: 190px;
+  margin-top: 10px;
 }
 
 .navcontainer{
@@ -27,7 +27,7 @@
 
 .nav-link {
   margin-right: 90px;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: blue;
 }
 

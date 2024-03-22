@@ -2,6 +2,11 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './homePage.css';
 
+
+{/*the Home page
+Stroy#1: As a user, I can see the Home page when the application launches so that I can login/signup, can access general information, and search a doctor*/}
+
+
 function HomePage() {
   return (
     <div className="containerHome-fluid">

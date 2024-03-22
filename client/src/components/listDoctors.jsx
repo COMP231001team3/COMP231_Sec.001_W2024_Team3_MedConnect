@@ -1,8 +1,14 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import './searchResult.css';
+import './listDoctors.css';
+import profileImage from './profile.jpg';
 
-function SearchResult() {
+
+{/* Page Result with the doctor list
+Story#2: As a user, I can see list of doctors, I can sort and filter to search a doctor, select a doctor and see their profile*/}
+ 
+
+function ListDoctors() {
   return (
     <section className='searchResultSection'> 
       <div className='searchResultDiv'>
@@ -16,7 +22,7 @@ function SearchResult() {
         </div>
         <div className='resultContent'>
           <div className="resultItem">
-              <img src="logo.jpg" alt="Imagem 1"/>
+          <img src={profileImage} alt="Imagem de perfil" />
               <div>
                 <h3>Pedro Henrique</h3>
                 <p> Location: Calgary <br/>Clinic: Get Well, MyDoc <br/>Speciality: Dermatologist</p>
@@ -24,7 +30,7 @@ function SearchResult() {
               </div>
             </div>
             <div className="resultItem">
-            <img src="logo.jpg" alt="Imagem 1"/>
+            <img src={profileImage} alt="Imagem de perfil" />
             <div>
               <h3>John Doe</h3>
               <p> Location: Calgary <br/>Clinic: Get Well, MyDoc <br/>Speciality: Dermatologist</p>
@@ -32,7 +38,7 @@ function SearchResult() {
             </div>
             </div>
             <div className="resultItem">
-            <img src="logo.jpg" alt="Imagem 1"/>
+            <img src={profileImage} alt="Imagem de perfil" />
             <div>
               <h3>Bruna Silva</h3>
               <p> Location: Calgary <br/>Clinic: Get Well, MyDoc <br/>Speciality: Dermatologist</p>
@@ -46,4 +52,4 @@ function SearchResult() {
   }
 
 
-  export default SearchResult ;
+  export default ListDoctors ;
