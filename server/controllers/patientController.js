@@ -3,7 +3,11 @@
 //Defines CRUD operations
 
 const bcrypt = require('bcryptjs');
+const express = require('express');
+const mongoose = require('mongoose');
 const Patient = require('../models/patient.model.js');
+
+mongoose.Promise = global.Promise
 
 // Retrieve all patients
 exports.getAllPatients = async (req, res) => {
@@ -45,10 +49,10 @@ exports.updatePatientById = async (req, res) => {
   }
 };
 
-//create new user
+//create new patient
 exports.registerPatient = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password, role, phone, address, documents, medicalHistory } = req.body;
 
         console.log('Request body:', req.body); // Log the request body for debugging
 
@@ -64,9 +68,14 @@ exports.registerPatient = async (req, res) => {
 
         // Create a new patient document
         const newPatient = new Patient({
-            name,
-            email,
-            password: hashedPassword
+          name,
+          email,
+          password: hashedPassword,
+          role,
+          phone,
+          address,
+          documents,
+          medicalHistory
         });
 
         // Save the patient to the database

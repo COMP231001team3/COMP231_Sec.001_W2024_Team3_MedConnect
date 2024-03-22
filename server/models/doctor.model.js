@@ -1,7 +1,9 @@
 //Iuliia Chugunova
 //Schema of doctor. Defines data structure, allows connections to database and CRUD operations 
 
+const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
+const Appointment = require('../models/appointment.model')
 
 const doctorSchema = new mongoose.Schema({
   name: {
@@ -57,7 +59,8 @@ const doctorSchema = new mongoose.Schema({
     reviewer: { type: String, required: true },
     comment: { type: String, required: true },
     rating: { type: Number, required: true, min: 0, max: 5 }
-  }]
+  }],
+  appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: Appointment }]
 });
 
 //hash password before saving to the database

@@ -1,49 +1,49 @@
 // Import the Express module
 const express = require('express');
-const bcrypt = require('bcryptjs');
-const bodyParser = require('body-parser');
 
-//Import routes
-const patientRoutes = require('./server/routes/patientRoute');
+// Import the Express application factory from your custom express.js file
+const app = require('./server/config/express')();
 
-//Import mongodb module
-let mongoose = require('mongoose')
-require('dotenv').config();
+// Import Mongoose for MongoDB connection
+const mongoose = require('mongoose');
 
 // Import path module
 const path = require('path');
 
-// Create an Express application
-const app = express();
+// Load environment variables from .env file
+require('dotenv').config();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json());
+// Connection string
+const mongoURI = process.env.MONGODB_URI;
 
-//connection string
-const mongoURI = process.env.MONGODB_URI
-
-// Mount patient routes
-app.use('/patients', patientRoutes);
-
-// Connecting to database
-mongoose.connect(mongoURI).then(() => {
-    console.log('db has connected!')
-}).catch(err => {
-    console.log(err)
+// Connect to MongoDB database
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  dbName: 'MedConnect'
 })
+.then(() => {
+  console.log('Connected to MongoDB');
+})
+.catch((err) => {
+  console.error('Error connecting to MongoDB:', err);
+  // Handle error, exit the application
+  process.exit(1);
+});
 
-_dirname = path.resolve();
-if(process.env.NODE_ENV==='production'){
-    app.use(express.static(path.join(__dirname, "/client/build")));
-    app.get('*',(req,res) => {
-        res.send('Hello, Express!');
-        res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+// Serve static files in production
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, "/frontend/build")));
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
     })
 }
 
 // Start the Express server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+// Export the Express application
+module.exports = app;
