@@ -1,33 +1,39 @@
 //Iuliia Chugunova
 //Schema of appointments. Defines data structure, allows connections to database and CRUD operations 
+
 const mongoose = require('mongoose');
+const Doctor = require('../models/doctor.model');
+const Patient = require('../models/patient.model')
 
 const appointmentSchema = new mongoose.Schema({
   patientId: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    description: 'ID of the patient'
+    ref: Patient,
+    required: true
   },
   doctorId: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    description: 'ID of the doctor'
+    ref: Doctor,
+    required: true
   },
-  dateTime: {
+  date: {
     type: Date,
-    required: true,
-    description: 'Date and time of the appointment'
+    required: true
+  },
+  time: {
+    type: String,
+    required: true
   },
   status: {
     type: String,
     enum: ['scheduled', 'cancelled', 'completed'],
-    required: true,
-    description: 'Status of the appointment (scheduled, cancelled, completed)'
+    default: 'scheduled'
   },
-  notes: {
-    type: String,
-    description: 'Additional notes or comments about the appointment'
+  reason: {
+    type: String
   }
 });
 
-module.exports = mongoose.model('Appointment', appointmentSchema);
+const Appointment = mongoose.model('Appointment', appointmentSchema);
+
+module.exports = Appointment;

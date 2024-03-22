@@ -3,6 +3,7 @@
 
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
+const Appointment = require('../models/appointment.model')
 
 const patientSchema = new mongoose.Schema({
   name: {
@@ -72,7 +73,8 @@ const patientSchema = new mongoose.Schema({
       }
     }],
     description: 'Array of medical history entries for the patient'
-  }
+  },
+  appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: Appointment }]
 });
 
 

@@ -36,7 +36,7 @@ exports.getDoctorById = async (req, res) => {
 //create a new doctor
 exports.createDoctor = async (req, res) => {
     try {
-        const { name, email, password, role, phone, specialization } = req.body;
+        const { name, email, password, role, phone, specialization, address, availability, rating, reviews } = req.body;
 
         console.log('Request body:', req.body); // Log the request body for debugging
 
@@ -57,7 +57,11 @@ exports.createDoctor = async (req, res) => {
             password: hashedPassword,
             role,
             phone,
-            specialization
+            specialization,
+            address,
+            availability,
+            rating,
+            reviews
         });
 
         // Save the doctor to the database

@@ -6,8 +6,10 @@ const compress = require('compression');
 const path = require('path'); // Include the path module
 
 const bcrypt = require('bcryptjs');
+//Import routes
 const doctorRoutes = require('../routes/doctorRoute');
 const patientRoutes = require('../routes/patientRoute');
+const appointmentRoutes = require('../routes/appointmentRoute');
 
 const { env } = require('process');
 
@@ -30,8 +32,12 @@ module.exports = function () {
     app.use(methodOverride());
 
     app.use(express.static("node_modules"));
+
+    //mount routes
     app.use('/patients', patientRoutes);
     app.use('/doctors', doctorRoutes);
+    app.use('/appointments', appointmentRoutes);
+
     __dirname = path.resolve();
     if(process.env.NODE_ENV==='production'){
         app.use(express.static(path.join(__dirname, "/frontend/build")));

@@ -52,7 +52,7 @@ exports.updatePatientById = async (req, res) => {
 //create new patient
 exports.registerPatient = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password, role, phone, address, documents, medicalHistory } = req.body;
 
         console.log('Request body:', req.body); // Log the request body for debugging
 
@@ -72,7 +72,10 @@ exports.registerPatient = async (req, res) => {
           email,
           password: hashedPassword,
           role,
-          phone
+          phone,
+          address,
+          documents,
+          medicalHistory
         });
 
         // Save the patient to the database
