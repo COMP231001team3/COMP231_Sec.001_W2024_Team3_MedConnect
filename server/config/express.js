@@ -10,6 +10,7 @@ const bcrypt = require('bcryptjs');
 const doctorRoutes = require('../routes/doctorRoute');
 const patientRoutes = require('../routes/patientRoute');
 const appointmentRoutes = require('../routes/appointmentRoute');
+const userRoutes = require('../routes/auth');
 
 const { env } = require('process');
 
