@@ -14,8 +14,8 @@ import DoctorProfile from './components/doctorProfile.jsx';
 import ReceptionistProfile from './components/receptionistProfile.jsx';
 import AppointmentBooking from './components/appointmentBooking.jsx';
 import DoctorProfileForUser from './components/doctorProfileForUser.jsx';
-import ReceptionistProfile from './components/receptionistProfile.jsx';
-import DoctorProfile from './components/doctorProfile.jsx';
+//import ReceptionistProfile from './components/receptionistProfile.jsx';
+//import DoctorProfile from './components/doctorProfile.jsx';
 
 
 function App() {
