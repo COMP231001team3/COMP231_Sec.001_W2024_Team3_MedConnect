@@ -37,6 +37,7 @@ module.exports = function () {
     app.use('/patients', patientRoutes);
     app.use('/doctors', doctorRoutes);
     app.use('/appointments', appointmentRoutes);
+    app.use('/users',UserRoutes)
 
     __dirname = path.resolve();
     if(process.env.NODE_ENV==='production'){
