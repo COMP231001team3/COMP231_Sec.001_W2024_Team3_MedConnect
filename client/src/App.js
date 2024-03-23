@@ -1,6 +1,7 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
+import { AuthProvider} from './Contexts/authContext'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Login from './components/login.jsx'
 import SignUp from './components/signup.jsx'
@@ -20,6 +21,7 @@ import DoctorProfileForUser from './components/doctorProfileForUser.jsx';
 
 function App() {
   return (  
+    <AuthProvider>
     <div className="App">
      <Router>
         <NavBar/>  
@@ -37,7 +39,9 @@ function App() {
         </Routes>
         <Footer/>
       </Router>
+  
     </div>
+  </AuthProvider>
   );
 }
 
