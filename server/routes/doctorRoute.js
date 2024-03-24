@@ -8,6 +8,15 @@ const doctorController = require('../controllers/doctorController');
 //Retrieve all doctors
 router.get('/', doctorController.getAllDoctors);
 
+//retrieve doctor by name
+router.get('/name/:name', doctorController.getDoctorByName);
+
+//retrieve doctor by spec
+router.get('/specialization/:specialization', doctorController.getDoctorBySpecialization);
+
+//search route
+router.get('/search', doctorController.searchDoctors);
+
 //Retrieve a doctor by Id
 router.get('/:id', doctorController.getDoctorById);
 

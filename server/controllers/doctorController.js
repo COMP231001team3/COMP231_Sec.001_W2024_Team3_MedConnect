@@ -10,13 +10,57 @@ mongoose.Promise = global.Promise
 
 //retrieve all doctors
 exports.getAllDoctors = async (req, res) => {
-  try {
+  try { 
     const doctors = await Doctor.find();
     res.status(200).json(doctors);
   } catch (error) {
     console.error('Error fetching doctors:', error);
     res.status(500).json({ error: 'An error occurred while fetching doctors' });
   }
+};
+
+//get doctor by name
+exports.getDoctorByName = async (req, res) => {
+  try {
+    // Use regex for case-insensitive matching
+    const doctor = await Doctor.findOne({ name: new RegExp(req.params.name, 'i') });
+    if (!doctor) {
+      return res.status(404).json({ error: 'Doctor not found' });
+    }
+    res.status(200).json(doctor);
+  } catch (error) {
+    console.error('Error fetching doctor by name:', error);
+    res.status(500).json({ error: 'An error occurred while fetching doctor by name' });
+  }
+};
+
+exports.searchDoctors = async (req, res) => {
+  try {
+    const query = req.query.query; // or use req.query.name, req.query.specialization, etc., depending on your query parameter
+    const doctors = await Doctor.find({
+      // Assuming you're searching by name; adjust as needed
+      name: { $regex: query, $options: 'i' }, // Case-insensitive regex search
+    });
+    res.json(doctors);
+  } catch (error) {
+    console.error('Search error:', error);
+    res.status(500).json({ error: 'An error occurred during the search' });
+  }
+};
+
+//get doctor by specialization
+exports.getDoctorBySpecialization = async (req, res) => {
+  try {
+    // Use regex for case-insensitive matching
+    const doctor = await Doctor.find({ specialization: new RegExp(req.params.specialization, 'i') });
+    if (!doctor) {
+      return res.status(404).json({ error: 'Doctor not found' });
+    }
+    res.status(200).json(doctor);
+  } catch (error) {
+    console.error('Error fetching doctor by name:', error);
+    res.status(500).json({ error: 'An error occurred while fetching doctor by specialization' });
+  }
 };
 
 //retrieve doctor by Id

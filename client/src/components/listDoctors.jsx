@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './listDoctors.css';
 import profileImage from './profile.jpg';
+import { Link } from 'react-router-dom';
 
 
 {/* Page Result with the doctor list
@@ -22,7 +23,10 @@ function ListDoctors() {
         </div>
         <div className='resultContent'>
           <div className="resultItem">
-          <img src={profileImage} alt="Imagem de perfil" />
+          <Link to="/doctorProfileForUser">
+              <img src={profileImage} alt="Imagem de perfil" />
+            </Link>
+            
               <div>
                 <h3>Pedro Henrique</h3>
                 <p> Location: Calgary <br/>Clinic: Get Well, MyDoc <br/>Speciality: Dermatologist</p>
@@ -30,7 +34,9 @@ function ListDoctors() {
               </div>
             </div>
             <div className="resultItem">
-            <img src={profileImage} alt="Imagem de perfil" />
+            <Link to="/doctorProfileForUser">
+              <img src={profileImage} alt="Imagem de perfil" />
+            </Link>
             <div>
               <h3>John Doe</h3>
               <p> Location: Calgary <br/>Clinic: Get Well, MyDoc <br/>Speciality: Dermatologist</p>
@@ -38,7 +44,9 @@ function ListDoctors() {
             </div>
             </div>
             <div className="resultItem">
-            <img src={profileImage} alt="Imagem de perfil" />
+            <Link to="/doctorProfileForUser">
+              <img src={profileImage} alt="Imagem de perfil" />
+            </Link>
             <div>
               <h3>Bruna Silva</h3>
               <p> Location: Calgary <br/>Clinic: Get Well, MyDoc <br/>Speciality: Dermatologist</p>
