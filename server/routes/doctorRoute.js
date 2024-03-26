@@ -20,9 +20,6 @@ router.get('/search', doctorController.searchDoctors);
 //Retrieve a doctor by Id
 router.get('/:id', doctorController.getDoctorById);
 
-//create a doctor
-router.post('/', doctorController.createDoctor);
-
 //retrieve a doctor by id and edit his/her info
 router.put('/:id', doctorController.updateDoctor);
 

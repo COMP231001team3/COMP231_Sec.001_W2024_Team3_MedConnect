@@ -1,6 +1,9 @@
 //import { useForm } from "react-hook-form";
 import { useState } from "react"; 
 import './auth.css';
+import { redirect, useNavigate } from "react-router-dom";
+import axios from 'axios'
+
 
 function SignUpForm(){
 
@@ -12,9 +15,9 @@ function SignUpForm(){
     const [password, setPassword] = useState('');
     const [selectedRole, setSelectedRole] = useState(''); 
     const [errorMsg, setErrorMsg] = useState('');
-
+    let navigate = useNavigate()
    
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         
         if (!name || !email || !address || !birthday || !phone || !password || !selectedRole) {
@@ -23,6 +26,23 @@ function SignUpForm(){
         }
         setErrorMsg('');
         console.log("Form submitted successfully");
+        try {
+            const response = await axios.post('/sign-up', {
+                name,
+                email,
+                address,
+                birthday,
+                phone,
+                password,
+                role: selectedRole
+            });
+            console.log(response.data); // Log the response from the server
+            setErrorMsg('');
+            // Redirect or show a success message
+        } catch (error) {
+            console.error('Error registering user:', error);
+            // Handle error (e.g., display error message)
+        }
         
     };
 
@@ -32,6 +52,7 @@ function SignUpForm(){
 
 
     return (
+        
         <div className="container" >
              <form className="signUpForm" onSubmit={handleSubmit}>
                 <h3 className="signUpH3">SIGN UP</h3>
@@ -124,7 +145,7 @@ function SignUpForm(){
                     />
                 </div>
                 <div className="d-grid">
-                    <button type="submit" className="signUpButton">
+                    <button type="submit" className="signUpButton" onClick={() => navigate("/sign-in")}>
                         SIGN-UP
                     </button>
                 </div>

@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const express = require('express');
 const mongoose = require('mongoose');
 const Doctor = require('../models/doctor.model');
+const Patient = require('../models/patient.model.js');
 
 mongoose.Promise = global.Promise
 
@@ -75,47 +76,6 @@ exports.getDoctorById = async (req, res) => {
     console.error('Error fetching doctor by ID:', error);
     res.status(500).json({ error: 'An error occurred while fetching doctor' });
   }
-};
-
-//create a new doctor
-exports.createDoctor = async (req, res) => {
-    try {
-        const { name, email, password, role, phone, specialization, address, availability, rating, reviews } = req.body;
-
-        console.log('Request body:', req.body); // Log the request body for debugging
-
-        // Check if a doctor with the same email already exists
-        const existingDoctor = await Doctor.findOne({ email });
-        if (existingDoctor) {
-            return res.status(400).json({ error: 'Doctor with this email already exists' });
-        }
-
-        // Hash the password
-        console.log('Password:', password); // Log the password for debugging
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Create a new doctor document
-        const newDoctor = new Doctor({
-            name,
-            email,
-            password: hashedPassword,
-            role,
-            phone,
-            specialization,
-            address,
-            availability,
-            rating,
-            reviews
-        });
-
-        // Save the doctor to the database
-        const savedDoctor = await newDoctor.save();
-
-        res.status(201).json({ message: 'Doctor registered successfully:'+ savedDoctor });
-    } catch (error) {
-        console.error('Error registering doctor:', error);
-        res.status(500).json({ error: 'An error occurred while registering doctor' });
-    }
 };
 
 //retrieve doctor by id and update profile information

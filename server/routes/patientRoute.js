@@ -15,9 +15,6 @@ router.get('/:id', patientController.getPatientById);
 // Update a patient by ID
 router.put('/:id', patientController.updatePatientById);
 
-// Route for patient registration
-router.post('/register', patientController.registerPatient);
-
 // Delete a patient by ID
 router.delete('/:id', patientController.deletePatientById);
 

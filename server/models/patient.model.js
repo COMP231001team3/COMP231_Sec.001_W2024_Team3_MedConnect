@@ -35,6 +35,10 @@ const patientSchema = new mongoose.Schema({
     required: true,
     description: 'Password of the patient'
   },
+  birth: {
+    type: String,
+    required: true
+  },
   documents: {
     type: [{
       type: {

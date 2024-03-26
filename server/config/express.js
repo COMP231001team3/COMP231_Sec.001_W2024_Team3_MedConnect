@@ -3,14 +3,15 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const compress = require('compression');
-const path = require('path'); // Include the path module
+const path = require('path'); 
 
 const bcrypt = require('bcryptjs');
 //Import routes
 const doctorRoutes = require('../routes/doctorRoute');
 const patientRoutes = require('../routes/patientRoute');
 const appointmentRoutes = require('../routes/appointmentRoute');
-const userRoutes = require('../routes/auth');
+const userRoute = require('../routes/userRoute');
+
 
 const { env } = require('process');
 
@@ -38,7 +39,7 @@ module.exports = function () {
     app.use('/patients', patientRoutes);
     app.use('/doctors', doctorRoutes);
     app.use('/appointments', appointmentRoutes);
-    app.use('/users',userRoutes)
+    app.use('/', userRoute)
 
     __dirname = path.resolve();
     if(process.env.NODE_ENV==='production'){
