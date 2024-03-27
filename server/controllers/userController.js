@@ -34,9 +34,9 @@ exports.registerUser = async (req, res) => {
          // Create a new user document based on the role
          let newUser;
          if (role === 'patient') {
-             newUser = new Patient({ name, email, password: hashedPassword, birth, phone, address });
+             newUser = new Patient({ name, email, password: hashedPassword, birth, role, phone, address });
          } else if (role === 'doctor') {
-             newUser = new Doctor({ name, email, password: hashedPassword, birth, phone, address });
+             newUser = new Doctor({ name, email, password: hashedPassword, birth, role, phone, address });
          }  else {
              return res.status(400).json({ error: 'Invalid role' });
          }

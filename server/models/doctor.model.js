@@ -13,7 +13,6 @@ const doctorSchema = new mongoose.Schema({
   },
   specialization: {
     type: String,
-    required: true,
     description: 'Specialization of the doctor'
   },
   email: {
@@ -32,6 +31,10 @@ const doctorSchema = new mongoose.Schema({
     type: String,
     required: true,
     description: 'Password of the doctor'
+  },
+  birth: {
+    type: String,
+    required: true
   },
   address: {
     type: String,

@@ -1,7 +1,7 @@
 //import { useForm } from "react-hook-form";
 import { useState } from "react"; 
 import './auth.css';
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
 
@@ -15,7 +15,8 @@ function SignUpForm(){
     const [password, setPassword] = useState('');
     const [selectedRole, setSelectedRole] = useState(''); 
     const [errorMsg, setErrorMsg] = useState('');
-    let navigate = useNavigate()
+    
+    let navigate = useNavigate();
    
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,27 +24,24 @@ function SignUpForm(){
         if (!name || !email || !address || !birthday || !phone || !password || !selectedRole) {
             setErrorMsg("Please fill in all fields");
             return;
+        } else {
+            try {
+                const response = await axios.post('http://localhost:5000/sign-up', {  // Update the URL with your backend URL
+                    name,
+                    email,
+                    address,
+                    birth: birthday,
+                    phone,
+                    password,
+                    role: selectedRole
+                });
+                navigate("/sign-in");
+                console.log(response.data); // Log the response from the server
+                setErrorMsg('');
+            } catch (error) {
+                console.error('Error registering user:', error);
+            }
         }
-        setErrorMsg('');
-        console.log("Form submitted successfully");
-        try {
-            const response = await axios.post('/sign-up', {
-                name,
-                email,
-                address,
-                birthday,
-                phone,
-                password,
-                role: selectedRole
-            });
-            console.log(response.data); // Log the response from the server
-            setErrorMsg('');
-            // Redirect or show a success message
-        } catch (error) {
-            console.error('Error registering user:', error);
-            // Handle error (e.g., display error message)
-        }
-        
     };
 
     const handleRoleChange = (e) => {
@@ -145,7 +143,7 @@ function SignUpForm(){
                     />
                 </div>
                 <div className="d-grid">
-                    <button type="submit" className="signUpButton" onClick={() => navigate("/sign-in")}>
+                    <button type="submit" className="signUpButton">
                         SIGN-UP
                     </button>
                 </div>
