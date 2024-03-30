@@ -30,7 +30,10 @@ function PatientProfile() {
   const handleFileDownload = async () => {
     try {
       const response = await axios.get('/api/download'); // Replace '/api/download' with your actual download endpoint
-      // Here you can handle the downloaded file, e.g., save it to local storage or open it in a new tab
+      const blob = new Blob([response.data]); 
+    const url = window.URL.createObjectURL(blob); 
+      localStorage.setItem('downloadedFile', url);
+
       console.log('File downloaded:', response.data);
     } catch (error) {
       console.error('Error downloading file:', error);
