@@ -33,7 +33,7 @@ function PatientProfile() {
       const blob = new Blob([response.data]); 
     const url = window.URL.createObjectURL(blob); 
       localStorage.setItem('downloadedFile', url);
-
+  // window.open(url, '_blank');
       console.log('File downloaded:', response.data);
     } catch (error) {
       console.error('Error downloading file:', error);
