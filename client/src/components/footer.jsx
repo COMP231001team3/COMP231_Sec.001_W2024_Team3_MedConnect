@@ -20,17 +20,17 @@ function Footer() {
           <div className="col-md-3">
             <h5 className="text-black">Links</h5>
             <ul className="list-unstyled">
-              <li><a className="text-gray" href="http://localhost:3000/">Home</a></li>
-              <li><a className="text-gray" href="#">Blog</a></li>
-              <li><a className="text-gray" href="#">News</a></li>
+              <li><a href="http://localhost:3000/">Home</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">News</a></li>
             </ul>
           </div>
           <div className="col-md-3">
             <h5 className="text-black">About</h5>
             <ul className="list-unstyled">
-              <li><a className="text-gray" href="#">About</a></li>
-              <li><a className="text-gray" href="#">Careers</a></li>
-              <li><a className="text-gray" href="#">Terms and Conditions</a></li>
+              <li ><a href="#">About</a></li>
+              <li ><a href="#">Careers</a></li>
+              <li ><a  href="#">Terms and Conditions</a></li>
             </ul>
           </div>
           <div className="col-md-3">
