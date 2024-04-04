@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const compress = require('compression');
 const path = require('path'); 
-require('dotenv').config();
+//require('dotenv').config();
 const bcrypt = require('bcryptjs');
 //Import routes
 const doctorRoutes = require('../routes/doctorRoute');
@@ -14,7 +14,7 @@ const userRoute = require('../routes/userRoute');
 
 
 const { env } = require('process');
-const { configDotenv } = require('dotenv');
+//const { configDotenv } = require('dotenv');
 
 module.exports = function () {
     var app = express();
@@ -35,7 +35,7 @@ module.exports = function () {
     app.use(methodOverride());
 
     app.use(express.static("node_modules"));
-    app.use(configDotenv)
+    //app.use(configDotenv)
     //mount routes
     app.use('/patients', patientRoutes);
     app.use('/doctors', doctorRoutes);

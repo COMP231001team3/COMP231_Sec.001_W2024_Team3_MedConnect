@@ -1,4 +1,4 @@
-/*const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 module.exports = (req, res, next) => {
   const authHeader = req.get('Authorization');
@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
   let decodedToken;
   try {
     console.log(decodedToken)
-    decodedToken = jwt.verify(token,process.env.SECRET || 'secretkeyappearshere');
+    decodedToken = jwt.verify(token,process.env.JWT_SECRET || 'secretkeyappearshere');
   } catch (err) {
     err.statusCode = 500;
     throw err;
@@ -23,9 +23,9 @@ module.exports = (req, res, next) => {
   }
   req.userId = decodedToken.userId;
   next();
-};*/
+};
 
-const jwt = require('jsonwebtoken');
+/*const jwt = require('jsonwebtoken');
 const { jwtSecretKey } = require(process.env.JWT_SECRET); 
 
 const verifyToken = (req, res, next) => {
@@ -48,4 +48,4 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-module.exports = verifyToken;
+module.exports = verifyToken;*/

@@ -23,15 +23,6 @@ import Logout from './components/logout.jsx';
 
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      setLoggedIn(true);
-    }
-  }, []);
-
   return (  
     <AuthProvider>
     <div className="App">
@@ -39,9 +30,9 @@ function App() {
         <NavBar/>  
         <Header/>  
         <Routes>
-          <Route path="/sign-in" element={<Login setLoggedIn={setLoggedIn} />} />
+          <Route path="/sign-in" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/"        element={<HomePage loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} />  
+          <Route path="/"        element={<HomePage />} />  
           <Route path="/ListDoctors" element={<ListDoctors />} />
           <Route path="/patientProfile" element={<PatientProfile />} />  
           <Route path="/bookAppointment" element={<AppointmentBooking />} />

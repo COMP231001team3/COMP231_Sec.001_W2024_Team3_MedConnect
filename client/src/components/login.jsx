@@ -1,4 +1,4 @@
-/*import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react"; 
@@ -84,8 +84,9 @@ function LoginForm(){
 }
 
 export default LoginForm;
-*/
 
+
+/*
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -96,49 +97,30 @@ const Login = ({ setLoggedIn }) => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  /*const handleSubmit = async (e) => {
+const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:5000/login', { email, password });
-      // Assuming the server responds with a token upon successful login
-      const token = response.data.token;
-      // Store the token in local storage for subsequent authenticated requests
-      localStorage.setItem('token', token);
-      // Update the loggedIn state and email
-      setLoggedIn(true);
-      updateEmail(email);
-      // Redirect the user to the homepage
-      navigate('/');
-    } catch (error) {
-      // Handle login failure
-      console.error('Login failed:', error);
-      setError('Invalid email or password');
-    }
-  };*/
-  const handleLogin = async (e) => {
-    e.preventDefault();
-
+  
     try {
       const response = await axios.post('http://localhost:5000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        email,
+        password,
       });
-      
-      if (response.ok) {
+  
+      if (response.status === 200) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
         setLoggedIn(true);
         navigate('/');
       } else {
-        const data = await response.json();
-        setError(data.message);
+        const errorData = await response.json();
+        setError(errorData.message);
       }
     } catch (error) {
       console.error('Login error:', error);
       setError('An error occurred during login');
     }
   };
+  
   return (
     <div className="container">
             <form onSubmit={handleLogin}>
@@ -191,4 +173,4 @@ const Login = ({ setLoggedIn }) => {
 };
 
 export default Login;
-
+*/
