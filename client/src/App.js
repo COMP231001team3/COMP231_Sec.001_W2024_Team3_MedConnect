@@ -1,8 +1,10 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import { AuthProvider} from './Contexts/authContext'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { createContext, useEffect, useState } from 'react'
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom'
 import Login from './components/login.jsx'
 import SignUp from './components/signup.jsx'
 import NavBar from './components/NavBar.jsx'
@@ -21,6 +23,18 @@ import CalendarWithAppointments from './components/calendar.jsx'
 //import DoctorProfile from './components/doctorProfile.jsx';
 
 
+/* a PrivateRoute component
+function PrivateRoute({ element, ...rest }) {
+  const { currentUser } = useAuth();
+
+  if (!currentUser) {
+      // Redirect to login if user is not authenticated
+      return <Navigate to="/sign-in" />;
+  }
+
+  return <Route {...rest} element={element} />;
+}
+*/
 function App() {
   return (  
     <AuthProvider>
@@ -31,7 +45,7 @@ function App() {
         <Routes>
           <Route path="/sign-in" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/"        element={<HomePage/>} />  
+          <Route path="/"        element={<HomePage />} />  
           <Route path="/ListDoctors" element={<ListDoctors />} />
           <Route path="/patientProfile" element={<PatientProfile />} />  
           <Route path="/bookAppointment" element={<AppointmentBooking />} />

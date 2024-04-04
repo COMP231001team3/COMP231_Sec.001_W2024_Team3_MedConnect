@@ -82,7 +82,7 @@ const patientSchema = new mongoose.Schema({
   appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: Appointment }]
 });
 
-
+/*
 //hash password before saving to the database
 patientSchema.pre('save', async function (next) {
   //hash the password only if it's modified or new
@@ -90,6 +90,7 @@ patientSchema.pre('save', async function (next) {
     return next();
   }
 
+  
   try {
     const hashedPassword = await bcrypt.hash(this.password, 10);
     this.password = hashedPassword;
@@ -97,6 +98,6 @@ patientSchema.pre('save', async function (next) {
   } catch (error) {
     next(error);
   }
-});
+});*/
 
 module.exports = mongoose.model('Patient', patientSchema);
