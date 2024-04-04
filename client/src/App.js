@@ -16,6 +16,7 @@ import ReceptionistProfile from './components/receptionistProfile.jsx';
 import AppointmentBooking from './components/appointmentBooking.jsx';
 import DoctorProfileForUser from './components/doctorProfileForUser.jsx';
 import Logout from './components/logout.jsx';
+import CalendarWithAppointments from './components/calendar.jsx'
 //import ReceptionistProfile from './components/receptionistProfile.jsx';
 //import DoctorProfile from './components/doctorProfile.jsx';
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="/receptionistProfile" element={<ReceptionistProfile />} />
           <Route path="/doctorProfile" element={<DoctorProfile />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/calendar" element={<CalendarWithAppointments />} />
         </Routes>
         <Footer/>
       </Router>
