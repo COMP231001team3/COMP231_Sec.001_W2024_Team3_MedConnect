@@ -1,4 +1,3 @@
-//import { useForm } from "react-hook-form";
 import { useState } from "react"; 
 import './auth.css';
 import { useNavigate } from 'react-router-dom';

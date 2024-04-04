@@ -1,7 +1,9 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import { AuthProvider} from './Contexts/authContext'
+import { createContext, useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Login from './components/login.jsx'
 import SignUp from './components/signup.jsx'
@@ -21,6 +23,15 @@ import Logout from './components/logout.jsx';
 
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setLoggedIn(true);
+    }
+  }, []);
+
   return (  
     <AuthProvider>
     <div className="App">
@@ -28,9 +39,9 @@ function App() {
         <NavBar/>  
         <Header/>  
         <Routes>
-          <Route path="/sign-in" element={<Login />} />
+          <Route path="/sign-in" element={<Login setLoggedIn={setLoggedIn} />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/"        element={<HomePage/>} />  
+          <Route path="/"        element={<HomePage loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} />  
           <Route path="/ListDoctors" element={<ListDoctors />} />
           <Route path="/patientProfile" element={<PatientProfile />} />  
           <Route path="/bookAppointment" element={<AppointmentBooking />} />
