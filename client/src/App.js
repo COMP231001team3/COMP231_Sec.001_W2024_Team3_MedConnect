@@ -18,6 +18,7 @@ import DoctorProfileForUser from './components/doctorProfileForUser.jsx';
 import Logout from './components/logout.jsx';
 //import ReceptionistProfile from './components/receptionistProfile.jsx';
 //import DoctorProfile from './components/doctorProfile.jsx';
+import UploadingDownloadingFiles from './components/uploadingDownloadingFiles.jsx';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           <Route path="/receptionistProfile" element={<ReceptionistProfile />} />
           <Route path="/doctorProfile" element={<DoctorProfile />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/MyFiles" element={<UploadingDownloadingFiles />} />
         </Routes>
         <Footer/>
       </Router>

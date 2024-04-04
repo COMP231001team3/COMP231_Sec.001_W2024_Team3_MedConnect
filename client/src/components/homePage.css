@@ -23,7 +23,7 @@
   height: 0;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
-  border-right: 15px solid gray; 
+  border-right: 15px solid white;
   background-color: transparent; 
   cursor: pointer;
   padding: 0; 
@@ -42,7 +42,7 @@
   height: 0;
   border-top: 10px solid transparent; 
   border-bottom: 10px solid transparent; 
-  border-left: 15px solid gray; 
+  border-left: 15px solid white; 
   background-color: transparent; 
   cursor: pointer; 
   padding: 0; 
@@ -87,5 +87,21 @@
 }
 
 .row4 p{
-  margin-top: 20px;
+  margin-top: 30px;
+}
+
+.homePageThreelslides {
+  position: relative;
+  width: 100%;
+  height: 350px; 
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.homePageThreelslides .textThreeslide {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
 }

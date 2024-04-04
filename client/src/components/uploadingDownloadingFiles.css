@@ -1,0 +1,131 @@
+.patienProfile{
+  display: flex;
+  margin-top: 70px;
+  margin-bottom: 70px;
+  height: 700px;
+}
+
+.bar{
+ width: 8%;
+ height: 800px;
+ background-color: #87E3C2;
+ margin-left: 350px;
+ margin-top: 50px;
+ margin-bottom: 90px ;
+}
+
+.bar p{
+  color: white;
+ }
+ 
+ .bar button{
+  background-color: #87E3C2;
+  color: black;
+  margin-top: 600px;
+  font-size: small;
+ }
+
+.containerProfile{
+ background-color: rgb(214, 214, 214);
+ display: flex;
+ width: 60%;
+ height: 800px;
+ margin-left: 500px;
+ margin-top: -890px;
+ margin-bottom: 70px ;
+}
+
+
+.profile{
+ width: 95%;
+ height: 600px;
+ background-color:whitesmoke;
+ margin-left: 30px;
+ margin-top: 85px;
+ display: flex;
+}
+.profile h2{
+ margin-left: 35px;
+ margin-top: 15px;
+ font-weight: normal;
+ display: flex;
+}
+.patientInf{
+ margin-left: 115px;
+ margin-top: 140px;
+ margin-left: -180px;
+ margin-right: 40px;
+ text-align: left;
+}
+
+.options {
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: space-between;
+ width: 650px; 
+ height: 500px; 
+ margin-left: 170px;
+ margin-top: 85px;
+}
+
+.options button {
+  flex-basis: 48%;
+  margin-bottom: 10px;
+  color: black ; 
+  background-color: white;
+  margin-left: 5px;
+  border: 2px solid white; 
+  transition: border-color 0.3s; 
+}
+
+.options button:hover {
+  border-color: green; 
+}
+
+.uploading {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
+ .uploadHeader {
+  display: flex;
+  align-items: center; 
+  margin-top: 40px;
+}
+
+.uploadHeader h2 {
+  margin-right: 140px; 
+}
+
+ .folderContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; 
+  margin-top: 20px; 
+  margin-right: 20px;
+  margin-left: 120px;
+}
+
+.downloading {
+  margin-top: 40px;
+  display: flex;
+  align-items: center; 
+}
+
+.downloading h2{
+  margin-right: 110px; 
+}
+
+
+.dragDropArea {
+  border: 2px dashed #ccc; 
+  padding: 90px 150px;
+  text-align: center;
+  margin-top: 10px;
+  background-color: rgb(225, 224, 224);
+}
+
+.dragDropArea p {
+  margin: 0;
+}
