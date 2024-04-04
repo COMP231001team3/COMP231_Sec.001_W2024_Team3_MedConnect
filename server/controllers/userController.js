@@ -52,35 +52,32 @@ exports.registerUser = async (req, res) => {
 
 // User login
 exports.loginUser = async (req, res) => {
-  try {
-      const { email, password } = req.body;
+    try {
+        const { email, password } = req.body;
 
-      // Find user by email in the Patient collection
-      let user = await Patient.findOne({ email });
+        // Find user by email in either the Patient or Doctor collection
+        const user = await Patient.findOne({ email }) || await Doctor.findOne({ email });
 
-      // If user is not found in the Patient collection, find in the Doctor collection
-      if (!user) {
-          user = await Doctor.findOne({ email });
-      }
+        // If user is not found, return an appropriate error message
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
 
-      // If user is still not found, return user not found error
-      if (!user) {
-          return res.status(404).json({ message: 'User not found' });
-      }
+        // Verify password
+        const isValidPassword = await bcrypt.compare(password, user.password);
+        if (!isValidPassword) {
+            return res.status(401).json({ message: 'Invalid password' });
+        }
 
-      // Verify password
-      const isValidPassword = await bcrypt.compare(password, user.password);
-      if (!isValidPassword) {
-          return res.status(401).json({ message: 'Invalid password' });
-      }
+        // Generate JWT token
+        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '12h' });
 
-      // Generate JWT token
-      const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '12h' });
-      return res.status(200).json({ token });
-  } catch (error) {
-      console.error(error);
-      return res.status(500).json({ message: 'Internal server error' });
-  }
+        // Return user data and token
+        return res.status(200).json({ token, user }); // Modify this line as needed
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
 };
 
   
