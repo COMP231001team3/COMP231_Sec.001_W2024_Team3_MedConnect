@@ -62,7 +62,7 @@ function HomePage() {
       </div>
       <div className="row2">
         <div className="col">
-          <div className="blog">
+          <div className="blog" id="blog">
             <h2 className="blog-title">Blog</h2>
             <div className="row3">
               <div className="col-md-6">
@@ -116,7 +116,7 @@ function HomePage() {
       </div>
       <div className="row4">
         <div className="col">
-          <div className="news">
+          <div className="news" id="about">
             <h2>News</h2>
             <div className="row4">
               <div className="col-md-4">

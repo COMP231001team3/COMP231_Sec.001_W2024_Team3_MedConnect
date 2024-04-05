@@ -7,8 +7,11 @@
   flex-wrap: wrap; 
   background-color:  #87E3C2;
   margin: 0;
+  color: #3A3E40;
 }
-
+.col-md-3 {
+  color: #3A3E40;
+}
 .container.p-2 {
   content: center;
   width: 100%;
@@ -34,7 +37,10 @@
   margin-left: 10x;
 }
 
-.col-md-3 a {
+a, li {
   font-size: 1.2rem;
+  color: #3A3E40;
+  text-decoration: none;
 }
+
 

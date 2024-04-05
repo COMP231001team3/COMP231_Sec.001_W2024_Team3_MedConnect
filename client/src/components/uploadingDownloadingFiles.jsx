@@ -31,8 +31,8 @@ function UploadingDownloadingFiles() {
           </div>
           <div className="uploading">
             <div className="uploadHeader">
-              <h2>UPLOAD FILES HERE</h2>
-              <button>UPLOAD</button>
+              <h2>DOWNLOAD FILES HERE</h2>
+              <button>DOWNLOAD</button>
             </div>
             <div className="folderContainer">
               <div>
@@ -53,8 +53,8 @@ function UploadingDownloadingFiles() {
               </div>
             </div>
             <div className="downloading">
-              <h2>DOWNLOAD FILES HERE</h2>
-              <button>DOWNLOAN</button>
+              <h2>UPLOAD FILES HERE</h2>
+              <button>UPLOAD</button>
             </div>
             <div className="dragDropArea">
               <p>Drag and drop files here</p>
