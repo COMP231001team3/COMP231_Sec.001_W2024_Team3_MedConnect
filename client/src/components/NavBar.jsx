@@ -11,7 +11,6 @@ import { useAuth } from "../Contexts/authContext";
 
 function NavBar() {
   const navigate = useNavigate();
-  const location = useLocation();
   const { currentUser, logout } = useAuth();
   const handleLogout = () => {
     logout();
@@ -86,9 +85,7 @@ function NavBar() {
                   </li>
                 )}
                 <li className="nav-item">
-                  <Link className="nav-link" to="/logout">
-                    Logout
-                  </Link>
+                <button className="nav-link btn btn-link" onClick={handleLogout}>Logout</button>
                 </li>
               </React.Fragment>
             ) : (

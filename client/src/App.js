@@ -37,13 +37,13 @@ function App() {
           <Route path="/"        element={<HomePage />} />  
           <Route path="/ListDoctors" element={<ListDoctors />} />
           <Route path="/patientProfile" element={<PatientProfile />} /> 
-          <Route path="/bookAppointment" element={<AppointmentBooking />} />
-          <Route path="/doctorProfileForUser" element={<DoctorProfileForUser />} /> 
+          <Route path="/bookAppointment/:doctorId" element={<AppointmentBooking />} /> {/*calendar to book appointment */}
+          <Route path="/doctorProfileForUser/:doctorId" element={<DoctorProfileForUser />} /> 
           <Route path="/receptionistProfile" element={<ReceptionistProfile />} />
           <Route path="/doctorProfile" element={<DoctorProfile />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/MyFiles" element={<UploadingDownloadingFiles />} />
-          <Route path="/calendar" element={<CalendarWithAppointments />} />
+          <Route path="/calendar" element={<CalendarWithAppointments />} /> {/*calendar to see history */}
           
         </Routes>
         <Footer/>

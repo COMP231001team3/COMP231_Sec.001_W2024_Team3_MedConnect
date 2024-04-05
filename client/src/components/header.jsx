@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import './header.css';
 
@@ -66,6 +67,9 @@ function Header() {
               value={searchInput}
               onChange={handleInputChange}
             />
+            <Link to={`/ListDoctors?results=${encodeURIComponent(JSON.stringify(searchResults))}`}>
+              Search
+            </Link>
             {isLoading && <div>Loading...</div>}
             {showDropdown && (
               <div className="search-dropdown">

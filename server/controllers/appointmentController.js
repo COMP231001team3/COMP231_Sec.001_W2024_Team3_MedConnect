@@ -5,50 +5,57 @@ const Appointment = require('../models/appointment.model');
 const Doctor = require('../models/doctor.model');
 const Patient = require('../models/patient.model');
 
-// Create a new appointment
-exports.createAppointment = async (req, res) => {
+// get doctor availibility to use for creating appointment
+async function getDoctorAvailability(doctorId) {
     try {
-        // Extract appointment details from the request body
-        const { patientId, doctorId, date, time, reason, status } = req.body;
-
-        // Check if the patient exists
-        const patient = await Patient.findById(patientId);
-        if (!patient) {
-            return res.status(404).json({ message: 'Patient not found' });
-        }
-
-        // Check if the doctor exists
-        const doctor = await Doctor.findById(doctorId);
-        if (!doctor) {
-            return res.status(404).json({ message: 'Doctor not found' });
-        }
-
-        const appointment = new Appointment({
-          patientId: patientId,
-          doctorId: doctorId,
-          date: date,
-          time: time,
-          status: status || 'scheduled',
-          reason: reason || ''
-      });
-
-      // Save the appointment to the database
-      await appointment.save();
-
-      // Update the patient's and doctor's appointment arrays
-      patient.appointments.push(appointment);
-      await patient.save();
-
-      doctor.appointments.push(appointment);
-      await doctor.save();
-
-        // Return a success response
-        return res.status(201).json({ message: 'Appointment created successfully', appointment });
+      const doctor = await Doctor.findById(doctorId);
+      if (!doctor) {
+        throw new Error('Doctor not found');
+      }
+      const doctorAvailability = doctor.availability;
+  
+      return doctorAvailability;
     } catch (error) {
-        console.error('Error creating appointment:', error);
-        return res.status(500).json({ message: 'Internal server error' });
+      console.error('Error fetching doctor availability:', error);
+      throw error;
     }
-};
+  }
+
+// Create a new appointment dynamically based on doctor availability
+exports.bookAppointment = async (req, res) => {
+    try {
+      const { doctorId, date, time, patientId } = req.body;
+  
+      // Check doctor's availability
+      // For simplicity, let's assume availability is an array of time slots
+      const doctorAvailability = getDoctorAvailability(doctorId);
+  
+      // Find an available slot
+      const availableSlot = doctorAvailability.find(slot => slot === time);
+      if (!availableSlot) {
+        return res.status(400).json({ message: 'Selected time slot is not available' });
+      }
+  
+      // Create a new appointment
+      const newAppointment = new Appointment({
+        doctorId,
+        date,
+        time,
+        bookedBy: patientId,
+        status: 'scheduled', // Set the initial status
+        isAvailable: false, // Mark the slot as booked
+      });
+  
+      // Save the appointment to the database
+      await newAppointment.save();
+  
+      res.status(201).json({ message: 'Appointment booked successfully!', appointment: newAppointment });
+    } catch (error) {
+      console.error('Error booking appointment:', error);
+      res.status(500).json({ error: 'An error occurred while booking the appointment.' });
+    }
+  };
+  
 
 // Get all appointments
 exports.getAppointments = async (req, res) => {
@@ -59,6 +66,17 @@ exports.getAppointments = async (req, res) => {
         res.status(500).json({ success: false, error: error.message });
     }
 };
+
+// GEt available slots
+exports.getAvailableSlots = async (req, res) => {
+    try {
+      const availableSlots = await Appointment.find({ isAvailable: true });
+      res.status(200).json(availableSlots);
+    } catch (error) {
+      console.error('Error fetching available slots:', error);
+      res.status(500).json({ message: 'An error occurred while fetching available slots' });
+    }
+  };
 
 // Get appointment by ID
 exports.getAppointmentById = async (req, res) => {
