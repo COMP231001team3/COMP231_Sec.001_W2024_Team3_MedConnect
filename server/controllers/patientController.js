@@ -36,11 +36,21 @@ exports.getPatientById = async (req, res) => {
 // Update a patient by ID
 exports.updatePatientById = async (req, res) => {
   try {
+    const { password, ...updateData } = req.body;
+
+    // Check if the password is included in the update
+    if (password) {
+      // Hash the password before updating
+      const hashedPassword = await bcrypt.hash(password, 10);
+      updateData.password = hashedPassword;
+    }
+
     const updatedPatient = await Patient.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      updateData,
       { new: true }
     );
+
     if (!updatedPatient) {
       return res.status(404).json({ message: 'Patient not found' });
     }

@@ -47,22 +47,25 @@ function NavBar() {
               <a className="nav-link" href="#about">About</a>
               {/*<Link className="nav-link" to="/about">About</Link>*/}
             </li>
-            {!currentUser ? (
-              <>
-              <li className="nav-item">
-              {/*<a className="nav-link" href="http://localhost:3000/sign-in">Login</a>*/}
-              <Link className="nav-link" to="/sign-in">Login</Link>
-            </li>
-              </>
-            ) : (
-              <>
-              <li className="nav-item">
-                  <Link className="nav-link" to="/profile">My Profile</Link>
-                </li>
+            {currentUser ? (
+              <React.Fragment>
+                {currentUser.role === 'patient' ? (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/patientProfile">My Profile</Link>
+                  </li>
+                ) : (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/doctorProfile">My Profile</Link>
+                  </li>
+                )}
                 <li className="nav-item">
-                  <button className="nav-link btn btn-link" onClick={handleLogout}>Logout</button>
+                  <Link className="nav-link" to="/logout">Logout</Link>
                 </li>
-              </>
+              </React.Fragment>
+            ) : (
+              <li className="nav-item">
+                <Link className="nav-link" to="/sign-in">Login</Link>
+              </li>
             )}
           </ul>
         </div>
