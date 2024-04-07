@@ -9,6 +9,9 @@ const patientController = require('../controllers/patientController');
 // Retrieve all patients
 router.get('/', patientController.getAllPatients);
 
+// GET patient by email
+router.get('/email/:email', patientController.getPatientByEmail);
+
 // Retrieve a specific patient by ID
 router.get('/:id', patientController.getPatientById);
 

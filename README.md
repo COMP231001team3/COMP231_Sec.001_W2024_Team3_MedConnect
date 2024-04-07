@@ -2,7 +2,7 @@
 
 The project is created using MERN stack as a part of Software development project course for Centennial College.
 
-To run the app run command from the project folder: npm start. It will run frontend and backend.
+To run the app run command from the project folder: npm start. It will run both frontend and backend servers.
 
 ## Folder structure:
 + client: contains frontend
@@ -44,3 +44,4 @@ To run the app run command from the project folder: npm start. It will run front
 + compression: for faster responses
 + nodemon: for updating server and page when changes are made
 + concurrently: for running backend and frontend at the same time
++ multer: for handling uploading files

@@ -1,14 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./patientProfile.css";
 import profileImage from "./profile.jpg";
+import axios from "axios";
+import { useAuth } from "../Contexts/authContext";
 
-function PatientProfile() {
+function DoctorProfile() {
+  /*const { currentUser } = useAuth();
+  const [doctor, setDoctor] = useState(null);
+
+  useEffect(() => {
+    const fetchDoctorData = async () => {
+      try {
+        // Fetch patient data from the backend API using the currentUser's email
+        const response = await axios.get(`http://localhost:5000/doctors/email/${currentUser.email}`);
+        setDoctor(response.data);
+      } catch (error) {
+        console.error("Error fetching patient data:", error);
+      }
+    };
+  
+    if (currentUser) {
+      fetchDoctortData();
+    }
+  }, [currentUser]);  
+
+  if (!doctor) {
+    return <div>Loading...</div>;
+  }
+*/
   return (
     <section className="patientProfile">
       <div className="bar">
         <p>MEDCONNECT</p>
-        <button className="btn btn-secondary">Configuration</button>
+        
       </div>
       <div className="containerProfile">
         <div className="profile">
@@ -36,4 +61,4 @@ function PatientProfile() {
   );
 }
 
-export default PatientProfile;
+export default DoctorProfile;

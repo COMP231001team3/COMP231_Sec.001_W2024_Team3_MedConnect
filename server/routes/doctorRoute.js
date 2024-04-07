@@ -8,6 +8,9 @@ const doctorController = require('../controllers/doctorController');
 //Retrieve all doctors
 router.get('/', doctorController.getAllDoctors);
 
+// GET doctor by email
+router.get('/email/:email', doctorController.getDoctorByEmail);
+
 //retrieve doctor by name
 router.get('/name/:name', doctorController.getDoctorByName);
 
@@ -25,5 +28,8 @@ router.put('/:id', doctorController.updateDoctor);
 
 //delete doctor
 router.delete('/:id', doctorController.deleteDoctor);
+
+//get assigned patients
+router.get('/:doctorId/patients', doctorController.getAssignedPatients);
 
 module.exports = router;

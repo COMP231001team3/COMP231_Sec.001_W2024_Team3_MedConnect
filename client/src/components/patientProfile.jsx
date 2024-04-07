@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./patientProfile.css";
 import profileImage from "./profile.jpg";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../Contexts/authContext";
 
 {
   /*Patient profile with the dashboard
 Story#4: As a patient, I can see a patient dashboard after logging in. On this page, I can access calendar, view/edit my profile, download/upload documents and manage appointments */
 }
 function PatientProfile() {
+  /*
   const [file, setFile] = useState(null);
 
   // Function to handle file upload
@@ -21,7 +24,7 @@ function PatientProfile() {
     formData.append("file", selectedFile);
 
     try {
-      await axios.post("/api/upload", formData); // Replace '/api/upload' with your actual upload endpoint
+      await axios.post("/upload", formData); 
       console.log("File uploaded successfully");
     } catch (error) {
       console.error("Error uploading file:", error);
@@ -31,7 +34,7 @@ function PatientProfile() {
   // Function to handle file download
   const handleFileDownload = async () => {
     try {
-      const response = await axios.get("/api/download"); // Replace '/api/download' with your actual download endpoint
+      const response = await axios.get("/download/:patientId/:filename"); 
       const blob = new Blob([response.data]);
       const url = window.URL.createObjectURL(blob);
       localStorage.setItem("downloadedFile", url);
@@ -41,18 +44,53 @@ function PatientProfile() {
       console.error("Error downloading file:", error);
     }
   };
+  */
+
+  const { currentUser } = useAuth();
+  const [patient, setPatient] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchPatientData = async () => {
+      try {
+        // Fetch patient data from the backend API using the currentUser's email
+        const response = await axios.get(`http://localhost:5000/patients/email/${currentUser.email}`);
+        setPatient(response.data);
+      } catch (error) {
+        console.error("Error fetching patient data:", error);
+      }
+    };
+  
+    if (currentUser) {
+      fetchPatientData();
+    }
+  }, [currentUser]);  
+
+  if (!patient) {
+    return <div>Loading...</div>;
+  }
+
+  const handleCalendar = () => {
+    // Navigate to the calendar page
+    navigate("/calendar");
+  };
+
+  const handleMyFiles = () => {
+    // Navigate to the my files page
+    navigate("/MyFiles");
+  };
 
   return (
     <section className="patientProfile">
       <div className="bar">
-        <p>SYSTEAM LOGO</p>
-        <button className="btn btn-secondary">Configuration</button>
+        <p></p>
+        {/*<button className="btn btn-secondary">Configuration</button>*/}
       </div>
       <div className="containerProfile">
         <div className="profile">
           <h2>Patient Profile</h2>
           <div className="patientInf">
-            <p>Informations:</p>
+            <p>Information:</p>
             <img
               src={profileImage}
               alt="Profile image"
@@ -60,16 +98,20 @@ function PatientProfile() {
               height="100"
               className="d-inline-block align-text-top mb-3"
             />
-            <p>Name:</p>
-            <p>Email:</p>
-            <p>Birthday</p>
-            <p>Cell:</p>
-            <p>Address:</p>
+            <p>Name: {patient.name}</p>
+            <p>Email: {patient.email}</p>
+            <p>Birthday: {patient.birth}</p>
+            <p>Cell: {patient.phone}</p>
+            <p>Address: {patient.address}</p>
           </div>
           <div className="options">
             <button className="btn">View and Edit Profile</button>
-            <button className="btn">Calendar</button>
-            <button className="btn">My Files</button>
+            <button className="btn" onClick={handleCalendar}>
+              Calendar
+            </button>
+            <button className="btn" onClick={handleMyFiles}>
+              My Files
+            </button>
             <button className="btn">Appointments History</button>
           </div>
         </div>

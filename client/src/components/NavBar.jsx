@@ -9,9 +9,37 @@ import { useAuth } from "../Contexts/authContext";
   /*the navagation bar of the application*/
 }
 
-function NavBar() {
+function NavBar({ handleLogin }) {
   const navigate = useNavigate();
   const { currentUser, logout } = useAuth();
+
+  const renderProfileLink = () => {
+    if (currentUser && currentUser.role === "patient") {
+      return (
+        <li className="nav-item">
+          <Link className="nav-link" to="/patientProfile">
+            My Profile
+          </Link>
+        </li>
+      );
+    } 
+    if (currentUser && currentUser.role === "doctor") {
+      return (
+        <li className="nav-item">
+          <Link className="nav-link" to="/doctorProfile">
+            My Profile
+          </Link>
+        </li>
+      );
+    }
+    return null;
+  };
+
+  const handleLoginClick = () => {
+    navigate("/sign-in"); // Navigate to the login page
+  };
+
+  console.log("Current user role:", currentUser); 
   const handleLogout = () => {
     logout();
     navigate("/");
@@ -69,28 +97,16 @@ function NavBar() {
               </a>
               {/*<Link className="nav-link" to="/about">About</Link>*/}
             </li>
+            {renderProfileLink()}
             {currentUser ? (
-              <React.Fragment>
-                {currentUser.role === "patient" ? (
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/patientProfile">
-                      My Profile
-                    </Link>
-                  </li>
-                ) : (
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/doctorProfile">
-                      My Profile
-                    </Link>
-                  </li>
-                )}
-                <li className="nav-item">
-                <button className="nav-link btn btn-link" onClick={handleLogout}>Logout</button>
-                </li>
-              </React.Fragment>
+              <li className="nav-item">
+                <button className="nav-link btn btn-link" onClick={handleLogout}>
+                  Logout
+                </button>
+              </li>
             ) : (
               <li className="nav-item">
-                <Link className="nav-link" to="/sign-in">
+                <Link className="nav-link" to="/sign-in" onClick={handleLoginClick}>
                   Login
                 </Link>
               </li>

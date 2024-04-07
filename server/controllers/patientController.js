@@ -60,6 +60,19 @@ exports.updatePatientById = async (req, res) => {
   }
 };
 
+//get patient by email
+exports.getPatientByEmail = async (req, res) => {
+  try {
+    const patient = await Patient.findOne({ email: req.params.email });
+    if (!patient) {
+      return res.status(404).json({ message: 'Patient not found' });
+    }
+    res.status(200).json(patient);
+  } catch (error) {
+    console.error('Error fetching patient by email:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
 
 // Delete a patient by ID
 exports.deletePatientById = async (req, res) => {

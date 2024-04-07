@@ -1,3 +1,5 @@
+//Iuliia Chugunova
+//Backend server configuration, imports express js app, connects to database and run server on port 5000
 // Import the Express module
 const express = require('express');
 

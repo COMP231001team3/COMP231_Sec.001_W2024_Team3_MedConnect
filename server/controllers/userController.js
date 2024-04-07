@@ -69,11 +69,44 @@ exports.loginUser = async (req, res) => {
             return res.status(401).json({ message: 'Invalid password' });
         }
 
+        let userWithRole = {}; // Declare and initialize userWithRole
+
+        // Assign user data based on role
+        if (user.role === "patient") {
+            userWithRole = {
+                email: user.email,
+                role: user.role, 
+                birth: user.birth,
+                address: user.address,
+                name: user.name,
+                phone: user.phone,
+                appointments: user.appointments,
+                documents: user.documents,
+                medicalHistory: user.medicalHistory
+            };
+        } 
+        else if (user.role === "doctor") {
+            userWithRole = {
+                email: user.email,
+                role: user.role, 
+                birth: user.birth,
+                name: user.name,
+                phone: user.phone,
+                appointments: user.appointments,
+                availability: user.availability,
+                medicalHistory: user.medicalHistory,
+                address: user.address,
+                specialization: user.specialization,
+                rating: user.rating,
+                reviews: user.reviews
+            };
+        }
+        
         // Generate JWT token
         const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '12h' });
 
         // Return user data and token
-        return res.status(200).json({ token, user }); // Modify this line as needed
+        return res.status(200).json({ token, user: userWithRole }); // Modify this line as needed
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Internal server error' });

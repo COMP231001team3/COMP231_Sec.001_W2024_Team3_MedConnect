@@ -44,6 +44,7 @@ function HomePage() {
         <div className="col">
           <div
             className="homePageThreelslides"
+            id="features"
             style={{ backgroundImage: `url(${slides[currentSlide].image})` }}
           >
             <p className="textThreeslide">{slides[currentSlide].text}</p>
