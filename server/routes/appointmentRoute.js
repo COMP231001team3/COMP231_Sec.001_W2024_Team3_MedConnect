@@ -6,13 +6,16 @@ const router = express.Router();
 const appointmentController = require('../controllers/appointmentController');
 
 // Create a new appointment
-router.post('/', appointmentController.createAppointment);
+router.post('/book', appointmentController.bookAppointment);
 
 // Get all appointments
 //router.get('/', appointmentController.getAppointments);
 
 // Get all appointments or by date
 router.get('/', appointmentController.getAppointmentsByDate);
+
+// Get all AVAILABLE slots
+router.get('/available-slots', appointmentController.getAvailableSlots);
 
 // Get appointment by ID
 router.get('/:id', appointmentController.getAppointmentById);

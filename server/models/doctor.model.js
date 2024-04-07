@@ -45,13 +45,10 @@ const doctorSchema = new mongoose.Schema({
     required: true,
     description: 'User role(patient, doctor or receptionist)'
   },
-  availability: {
-    type: [{
-      day: { type: String, required: true },
-      time: { type: String, required: true }
-    }],
-    description: 'Availability schedule of the doctor'
-  },
+  availability: [{
+    day: { type: String, required: true },
+    slots: [{ type: String, required: true }] // Array of available time slots for each day
+  }],
   rating: {
     type: Number,
     min: 0,

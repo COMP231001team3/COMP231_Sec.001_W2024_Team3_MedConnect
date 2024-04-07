@@ -81,14 +81,27 @@ exports.getDoctorById = async (req, res) => {
 //retrieve doctor by id and update profile information
 exports.updateDoctor = async (req, res) => {
   try {
-    const doctor = await Doctor.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!doctor) {
-      return res.status(404).json({ error: 'Doctor not found' });
+    const { password, ...updateData } = req.body;
+
+    // Check if the password is included in the update
+    if (password) {
+      // Hash the password before updating
+      const hashedPassword = await bcrypt.hash(password, 10);
+      updateData.password = hashedPassword;
     }
-    res.status(200).json({ message: 'Doctor updated successfully', doctor });
+
+    const updatedDoctor = await Doctor.findByIdAndUpdate(
+      req.params.id,
+      updateData,
+      { new: true }
+    );
+
+    if (!updatedDoctor) {
+      return res.status(404).json({ message: 'Doctor not found' });
+    }
+    res.json(updatedDoctor);
   } catch (error) {
-    console.error('Error updating doctor:', error);
-    res.status(500).json({ error: 'An error occurred while updating doctor' });
+    res.status(500).json({ message: error.message });
   }
 };
 
