@@ -99,9 +99,6 @@ exports.getAppointments = async (req, res) => {
     }
 };
 
-<<<<<<< HEAD
-
-=======
 // GEt available slots
 exports.getAvailableSlots = async (req, res) => {
     try {
@@ -112,7 +109,6 @@ exports.getAvailableSlots = async (req, res) => {
       res.status(500).json({ message: 'An error occurred while fetching available slots' });
     }
   };
->>>>>>> a8919a08bdbb3a97daa015551784dd2d626ee3f1
 
 // Get appointment by ID
 exports.getAppointmentById = async (req, res) => {

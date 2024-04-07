@@ -12,7 +12,8 @@ router.post('/book', appointmentController.bookAppointment);
 //router.get('/', appointmentController.getAppointments);
 
 // Get all appointments or by date
-router.get('/', appointmentController.getAppointmentsByDate);
+router.get('/', appointmentController.getAppointments);
+
 
 // Get all AVAILABLE slots
 router.get('/available-slots', appointmentController.getAvailableSlots);
