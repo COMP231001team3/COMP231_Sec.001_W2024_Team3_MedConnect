@@ -9,7 +9,10 @@ const appointmentController = require('../controllers/appointmentController');
 router.post('/', appointmentController.createAppointment);
 
 // Get all appointments
-router.get('/', appointmentController.getAppointments);
+//router.get('/', appointmentController.getAppointments);
+
+// Get all appointments or by date
+router.get('/', appointmentController.getAppointmentsByDate);
 
 // Get appointment by ID
 router.get('/:id', appointmentController.getAppointmentById);

@@ -51,14 +51,48 @@ exports.createAppointment = async (req, res) => {
 };
 
 // Get all appointments
+// exports.getAppointments = async (req, res) => {
+//     try {
+//         const appointments = await Appointment.find();
+//         res.status(200).json({ success: true, data: appointments });
+//     } catch (error) {
+//         res.status(500).json({ success: false, error: error.message });
+//     }
+// };
+
+// Get appointments by date
 exports.getAppointments = async (req, res) => {
+    const { date } = req.query; // Extract date from query parameters
+
     try {
-        const appointments = await Appointment.find();
+        let query;
+
+        if (date) {
+            // Assuming date is in YYYY-MM-DD format and your date field in the database is a Date type
+            const startOfDay = new Date(date);
+            startOfDay.setHours(0, 0, 0, 0);
+
+            const endOfDay = new Date(date);
+            endOfDay.setHours(23, 59, 59, 999);
+
+            query = Appointment.find({
+                date: {
+                    $gte: startOfDay,
+                    $lte: endOfDay,
+                },
+            });
+        } else {
+            query = Appointment.find(); // If no date is provided, fetch all appointments
+        }
+
+        const appointments = await query;
         res.status(200).json({ success: true, data: appointments });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
 };
+
+
 
 // Get appointment by ID
 exports.getAppointmentById = async (req, res) => {
