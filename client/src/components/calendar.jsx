@@ -54,11 +54,14 @@ useEffect(() => {
                 <div>
     <h4>Appointments for {startDate.toLocaleDateString()}:</h4>
     {appointments.map((appointment, index) => (
-        <div key={index}>
-            {/* Display appointment details here */}
-            <p>Time: {appointment.time}, Reason: {appointment.reason}</p>
-        </div>
-    ))}
+    <div key={index} style={{ 
+        padding: '10px', 
+        margin: '5px', 
+        borderLeft: `5px solid ${appointment.status === 'scheduled' ? 'green' : appointment.status === 'cancelled' ? 'red' : 'blue'}` 
+    }}>
+        <p>Time: {appointment.time}, Reason: {appointment.reason}, Status: {appointment.status}</p>
+    </div>
+))}
 </div>
 
             </div>
