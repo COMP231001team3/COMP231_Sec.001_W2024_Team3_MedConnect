@@ -9,7 +9,11 @@ const appointmentController = require('../controllers/appointmentController');
 router.post('/book', appointmentController.bookAppointment);
 
 // Get all appointments
+//router.get('/', appointmentController.getAppointments);
+
+// Get all appointments or by date
 router.get('/', appointmentController.getAppointments);
+
 
 // Get all AVAILABLE slots
 router.get('/available-slots', appointmentController.getAvailableSlots);
