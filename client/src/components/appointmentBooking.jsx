@@ -72,14 +72,32 @@ const generateTimeSlots = (doctorAvailability) => {
   return slots;
 };
 
+// const filterTimeSlotsByDate = (doctors, selectedDate) => {
+//   const dayOfWeek = selectedDate.toLocaleDateString('en-US', { weekday: 'long' });
+
+//   const timeSlots = doctors.flatMap(doctor => 
+//     doctor.availability.find(day => day.day === dayOfWeek)?.slots || []
+//   );
+
+//   return [...new Set(timeSlots)]; // Remove duplicate slots
+// };
 const filterTimeSlotsByDate = (doctors, selectedDate) => {
   const dayOfWeek = selectedDate.toLocaleDateString('en-US', { weekday: 'long' });
 
-  const timeSlots = doctors.flatMap(doctor => 
-    doctor.availability.find(day => day.day === dayOfWeek)?.slots || []
-  );
+  let timeSlots = [];
 
-  return [...new Set(timeSlots)]; // Remove duplicate slots
+  doctors.forEach(doctor => {
+    const availableSlots = doctor.availability.find(day => day.day === dayOfWeek)?.slots || [];
+    availableSlots.forEach(slot => {
+      timeSlots.push(`${doctor.name} - ${slot}`);
+    });
+  });
+
+  // Normalize time format (remove leading zeros)
+  timeSlots = timeSlots.map(slot => slot.replace(/^0/, ''));
+
+  // Remove duplicates
+  return [...new Set(timeSlots)].sort();
 };
 
 const AppointmentBooking = ({ selectedDoctor, patientId }) => {
@@ -171,7 +189,7 @@ const AppointmentBooking = ({ selectedDoctor, patientId }) => {
           onChange={handleDateChange}
           inline
         />
-        <select value={selectedTimeSlot} onChange={handleTimeSlotChange} className="timeInput">
+        <select value={selectedTimeSlot} onChange={handleTimeSlotChange} className="timeInput" title='Select Time Slot'>
         <option value="">Select Time Slot</option>
             {timeSlots.map((slot, index) => (
               <option key={index} value={slot}>{slot}</option>
