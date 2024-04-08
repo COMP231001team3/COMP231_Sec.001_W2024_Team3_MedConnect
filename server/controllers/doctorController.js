@@ -106,7 +106,7 @@ exports.updateDoctor = async (req, res) => {
   }
 };
 
-//get doctor by email
+//get doctor by email (Iuliia)
 exports.getDoctorByEmail = async (req, res) => {
   try {
     const doctor = await Doctor.findOne({ email: req.params.email });

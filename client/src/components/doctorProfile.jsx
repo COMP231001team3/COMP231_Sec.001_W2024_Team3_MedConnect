@@ -6,8 +6,9 @@ import axios from "axios";
 import { useAuth } from "../Contexts/authContext";
 
 function DoctorProfile() {
-  /*const { currentUser } = useAuth();
+  const { currentUser } = useAuth();
   const [doctor, setDoctor] = useState(null);
+  //const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDoctorData = async () => {
@@ -16,19 +17,19 @@ function DoctorProfile() {
         const response = await axios.get(`http://localhost:5000/doctors/email/${currentUser.email}`);
         setDoctor(response.data);
       } catch (error) {
-        console.error("Error fetching patient data:", error);
+        console.error("Error fetching doctor data:", error);
       }
     };
   
     if (currentUser) {
-      fetchDoctortData();
+      fetchDoctorData();
     }
   }, [currentUser]);  
 
   if (!doctor) {
     return <div>Loading...</div>;
   }
-*/
+
   return (
     <section className="patientProfile">
       <div className="bar">
@@ -47,8 +48,11 @@ function DoctorProfile() {
               height="100"
               className="d-inline-block align-text-top mb-3"
             />
-            <p>Name:</p>
-            <p>Email:</p>
+            <p>Name: {doctor.name}</p>
+            <p>Email: {doctor.email}</p>
+            <p>Birthday: {doctor.birth}</p>
+            <p>Cell: {doctor.phone}</p>
+            <p>Address: {doctor.address}</p>
           </div>
           <div className="options">
             <button className="btn">View and Edit Profile</button>

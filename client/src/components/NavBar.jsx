@@ -23,7 +23,7 @@ function NavBar({ handleLogin }) {
         </li>
       );
     } 
-    if (currentUser && currentUser.role === "doctor") {
+    if (currentUser) {
       return (
         <li className="nav-item">
           <Link className="nav-link" to="/doctorProfile">
