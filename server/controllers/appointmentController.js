@@ -101,14 +101,41 @@ exports.getAppointments = async (req, res) => {
 
 // GEt available slots
 exports.getAvailableSlots = async (req, res) => {
-    try {
-      const availableSlots = await Appointment.find({ isAvailable: true });
-      res.status(200).json(availableSlots);
-    } catch (error) {
-      console.error('Error fetching available slots:', error);
-      res.status(500).json({ message: 'An error occurred while fetching available slots' });
-    }
-  };
+  try {
+    const selectedDate = new Date(req.query.date); // Extract selected date from query params
+    
+    // Fetch available time slots for the selected date
+    const availableSlots = await Appointment.find({
+        date: selectedDate,
+        isAvailable: true
+    });
+
+    // Flatten the slots from the availability array and filter unique times
+    let allSlots = [];
+    availableSlots.forEach(appointment => {
+      appointment.availability.forEach(slot => {
+        allSlots.push(slot.slots[0], slot.slots[1]); // Assuming each day has two slots
+      });
+    });
+
+    // Convert the slots to the desired format
+    const formattedSlots = allSlots.map(slot => {
+      const [hour, minutePart] = slot.split(':');
+      const [minute, period] = minutePart.split(' ');
+
+      return `${hour}:${minute} ${period.toUpperCase()}`;
+    });
+
+    // Filter unique times and send the response
+    const uniqueSlots = [...new Set(formattedSlots)];
+    res.status(200).json({ times: uniqueSlots });
+
+  } catch (error) {
+    console.error('Error fetching available slots:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
 
 // Get appointment by ID
 exports.getAppointmentById = async (req, res) => {

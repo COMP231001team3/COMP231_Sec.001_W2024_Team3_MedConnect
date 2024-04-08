@@ -72,6 +72,15 @@ const generateTimeSlots = (doctorAvailability) => {
   return slots;
 };
 
+const filterTimeSlotsByDate = (doctors, selectedDate) => {
+  const dayOfWeek = selectedDate.toLocaleDateString('en-US', { weekday: 'long' });
+
+  const timeSlots = doctors.flatMap(doctor => 
+    doctor.availability.find(day => day.day === dayOfWeek)?.slots || []
+  );
+
+  return [...new Set(timeSlots)]; // Remove duplicate slots
+};
 
 const AppointmentBooking = ({ selectedDoctor, patientId }) => {
   //const [startDate, setStartDate] = useState(new Date());
@@ -84,21 +93,40 @@ const AppointmentBooking = ({ selectedDoctor, patientId }) => {
     setTimeSlots(generateTimeSlots(startDate));
   }, [startDate]);*/
 
+  // useEffect(() => {
+  //     // Fetch doctor's availability and generate time slots
+  //   const fetchAvailability = async () => {
+  //     try {
+  //       const response = await axios.get(`/doctors/${selectedDoctor._id}`);
+  //       const doctorAvailability = response.data.availability;
+  //       const slots = generateTimeSlots(doctorAvailability);
+  //       setTimeSlots(slots);
+  //     } catch (error) {
+  //       console.error('Error fetching doctor availability:', error);
+  //     }
+  //   };
+
+  //   fetchAvailability();
+  // }, [selectedDoctor]);
+
   useEffect(() => {
-      // Fetch doctor's availability and generate time slots
     const fetchAvailability = async () => {
       try {
-        const response = await axios.get(`/doctors/${selectedDoctor._id}`);
-        const doctorAvailability = response.data.availability;
-        const slots = generateTimeSlots(doctorAvailability);
+        // Fetch all doctors
+        const response = await axios.get('http://localhost:5000/doctors');
+        console.log('API Response:', response.data);  // Log the response data
+        const allDoctors = response.data;
+    
+        // Filter time slots based on selected date
+        const slots = filterTimeSlotsByDate(allDoctors, selectedDate);
         setTimeSlots(slots);
       } catch (error) {
-        console.error('Error fetching doctor availability:', error);
+        console.error('Error fetching doctors availability:', error);
       }
     };
 
     fetchAvailability();
-  }, [selectedDoctor]);
+  }, [selectedDate]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -141,7 +169,6 @@ const AppointmentBooking = ({ selectedDoctor, patientId }) => {
         <DatePicker
           selected={selectedDate}
           onChange={handleDateChange}
-          //minDate={new Date()} 
           inline
         />
         <select value={selectedTimeSlot} onChange={handleTimeSlotChange} className="timeInput">
