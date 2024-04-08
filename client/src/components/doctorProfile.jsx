@@ -40,7 +40,7 @@ function DoctorProfile() {
         <div className="profile">
           <h2>Doctor Profile</h2>
           <div className="patientInf">
-            <p>Informations:</p>
+            <p>Information:</p>
             <img
               src={profileImage}
               alt="Profile image"
