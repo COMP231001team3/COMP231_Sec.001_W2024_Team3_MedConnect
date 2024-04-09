@@ -82,38 +82,38 @@
   border-color: green; 
 }
 
-.uploading {
+.files {
   display: flex;
   flex-direction: column;
   align-items: center; 
 }
 
- .uploadHeader {
+ .DowloadHeader {
   display: flex;
   align-items: center; 
   margin-top: 40px;
 }
 
-.uploadHeader h2 {
+.DowloadHeader h2 {
   margin-right: 140px; 
 }
 
  .folderContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between; 
+  justify-content: space-between;
   margin-top: 20px; 
   margin-right: 20px;
   margin-left: 120px;
 }
 
-.downloading {
+.uploading {
   margin-top: 40px;
   display: flex;
   align-items: center; 
 }
 
-.downloading h2{
+.uploading h2{
   margin-right: 110px; 
 }
 
