@@ -1,28 +1,13 @@
-//Alejandra Bonito
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import './calendar.css';
 import 'react-datepicker/dist/react-datepicker.css';
 
-
 const CalendarWithAppointments = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [appointments, setAppointments] = useState([]);
 
-    //to get appointments from database
-    /*
-    const appointmentsForSelectedDate = appointments.filter(appointment => {
-        const appointmentDate = new Date(appointment.date);
-        return (
-          appointmentDate.getDate() === selectedDate.getDate() &&
-          appointmentDate.getMonth() === selectedDate.getMonth() &&
-          appointmentDate.getFullYear() === selectedDate.getFullYear()
-        );
-      });
-    */
-
-      const fetchAppointmentsForDate = async (date) => {
-        // Format the date as YYYY-MM-DD
+    const fetchAppointmentsForDate = async (date) => {
         const formattedDate = date.toISOString().split('T')[0];
     
         try {
@@ -37,39 +22,35 @@ const CalendarWithAppointments = () => {
         }
     };
 
-    // Whenever startDate changes, fetch appointments for the new date.
-useEffect(() => {
-  fetchAppointmentsForDate(startDate);
-}, [startDate]);
-
+    useEffect(() => {
+        fetchAppointmentsForDate(startDate);
+    }, [startDate]);
 
     return (
         <div className="calendarContainer">
             <div className="datePickerContainer">
                 <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-                inline
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    inline
+                    style={{ zIndex: 9999 }} // Ensure date picker renders above other elements
                 />
                 <br/>
                 <div>
-    <h4>Appointments for {startDate.toLocaleDateString()}:</h4>
-    {appointments.map((appointment, index) => (
-    <div key={index} style={{ 
-        padding: '10px', 
-        margin: '5px', 
-        borderLeft: `5px solid ${appointment.status === 'scheduled' ? 'green' : appointment.status === 'cancelled' ? 'red' : 'blue'}` 
-    }}>
-        <p>Time: {appointment.time}, Reason: {appointment.reason}, Status: {appointment.status}</p>
-    </div>
-))}
-</div>
-
+                    <h4>Appointments for {startDate.toLocaleDateString()}:</h4>
+                    {appointments.map((appointment, index) => (
+                        <div key={index} style={{ 
+                            padding: '10px', 
+                            margin: '5px', 
+                            borderLeft: `5px solid ${appointment.status === 'scheduled' ? 'green' : appointment.status === 'cancelled' ? 'red' : 'blue'}` 
+                        }}>
+                            <p>Time: {appointment.time}, Reason: {appointment.reason}, Status: {appointment.status}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
-           
         </div>
-        
     );
-  };
+};
 
 export default CalendarWithAppointments;

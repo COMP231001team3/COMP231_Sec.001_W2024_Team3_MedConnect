@@ -1,19 +1,23 @@
-.calendarContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px; 
-    margin-top: 20px; 
-}
-
+/* Adjustments to .datePickerContainer */
 .datePickerContainer {
     display: flex;
     justify-content: center;
-    align-items: start; 
-    margin-bottom: 20px; 
+    align-items: flex-start; /* Adjusted alignment */
+    margin-bottom: 20px;
+    position: relative; /* Ensure relative positioning for children */
 }
 
-h4{
-    margin-left: 30px;
+/* Adjustments to .datePickerWrapper */
+.datePickerWrapper {
+    position: absolute; /* Position date picker relative to container */
+    top: 100%; /* Position date picker below container */
+    left: 50%; /* Center date picker horizontally */
+    transform: translateX(-50%); /* Center date picker horizontally */
+    z-index: 999; /* Ensure date picker renders above other elements */
+}
+
+/* Optional: Adjustments to h4 */
+h4 {
+    margin-left: 0; /* Reset margin */
+    margin-bottom: 10px; /* Add some space below */
 }
