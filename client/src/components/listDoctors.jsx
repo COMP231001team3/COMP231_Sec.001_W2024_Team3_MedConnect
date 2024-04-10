@@ -1,3 +1,51 @@
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+
+function ListDoctors() {
+  const [doctors, setDoctors] = useState([]);
+  const location = useLocation();
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const results = queryParams.get('results');
+    if (results) {
+      try {
+        const decodedResults = JSON.parse(decodeURIComponent(results));
+        setDoctors(decodedResults);
+      } catch (error) {
+        console.error("Decode error: ", error);
+        
+      }
+    }
+  }, [location.search]); 
+
+  return (
+    <section className='searchResultSection'>
+      <div className='searchResultDiv'>
+        <div className='resultContent'>
+          {doctors.map((doctor) => (
+            <div key={doctor._id} className="resultItem">
+              <Link to="/doctorProfileForUser">
+
+              </Link>
+              <div>
+                <h3>{doctor.name}</h3>
+                <p> Location: {doctor.address} <br/>Speciality: {doctor.specialization}</p>
+                <p>Rating: {doctor.rating}/5</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default ListDoctors;
+
+/*
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './listDoctors.css';
@@ -6,7 +54,7 @@ import { Link } from 'react-router-dom';
 
 
 {/* Page Result with the doctor list
-Story#2: As a user, I can see list of doctors, I can sort and filter to search a doctor, select a doctor and see their profile*/}
+Story#2: As a user, I can see list of doctors, I can sort and filter to search a doctor, select a doctor and see their profile}
  
 
 function ListDoctors() {
@@ -61,3 +109,4 @@ function ListDoctors() {
 
 
   export default ListDoctors ;
+*/
