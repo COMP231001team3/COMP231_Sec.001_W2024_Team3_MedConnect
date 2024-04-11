@@ -34,10 +34,11 @@
 
 
 .bookAppointment{
-  height: 90px;
+  height: auto;
   width: 60%;
   display: flex;
-  background-color: gray;
+  flex-direction: column; 
+  
   margin-left: 400px;
 }
 
@@ -50,10 +51,10 @@
 
 .bookAppointment p{
   color: white;
+  background-color: gray;
   font-size: 1.1rem;
-  margin-top: 30px;
-  margin-left: 400px;
-
+  height: 60px;
+  text-align: center;
 } 
 
 .clinicAddress {
@@ -114,4 +115,9 @@
 .bookApp{
   display: flex;
   margin-top: 100px;
+}
+
+.bookAppointment button {
+  align-self: flex-start; 
+  margin-top: 10px; 
 }

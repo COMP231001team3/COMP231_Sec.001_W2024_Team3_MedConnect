@@ -1,36 +1,13 @@
 //Alejandra Bonito, Iuliia Chugunova
 import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import DatePicker from 'react-datepicker';
 import axios from 'axios';
 import './appointmentBooking.css';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useAuth } from "../Contexts/authContext";
 
-/*
-const generateTimeSlots = (selectedDate) => {
-  const slots = [];
-  let startTime = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate(), 9, 0, 0);
-  const endTime = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate(), 17, 0, 0);
-  const currentDate = new Date();
-  const isToday = selectedDate.toDateString() === currentDate.toDateString();
-
-  while (startTime < endTime) {
-    
-    if (!isToday || (isToday && startTime >= currentDate)) {
-      const start = startTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-      startTime.setMinutes(startTime.getMinutes() + 30); 
-      const end = startTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-
-      slots.push(`${start} - ${end}`);
-    } else {
-      
-      startTime.setMinutes(startTime.getMinutes() + 30);
-    }
-  }
-
-  return slots;
-};
-*/
-
+//a function that generates time slots for a doctor
 const generateTimeSlots = (doctorAvailability) => {
   const slots = [];
 
@@ -72,15 +49,6 @@ const generateTimeSlots = (doctorAvailability) => {
   return slots;
 };
 
-// const filterTimeSlotsByDate = (doctors, selectedDate) => {
-//   const dayOfWeek = selectedDate.toLocaleDateString('en-US', { weekday: 'long' });
-
-//   const timeSlots = doctors.flatMap(doctor => 
-//     doctor.availability.find(day => day.day === dayOfWeek)?.slots || []
-//   );
-
-//   return [...new Set(timeSlots)]; // Remove duplicate slots
-// };
 const filterTimeSlotsByDate = (doctors, selectedDate) => {
   const dayOfWeek = selectedDate.toLocaleDateString('en-US', { weekday: 'long' });
 
@@ -100,51 +68,45 @@ const filterTimeSlotsByDate = (doctors, selectedDate) => {
   return [...new Set(timeSlots)].sort();
 };
 
-const AppointmentBooking = ({ selectedDoctor, patientId }) => {
-  //const [startDate, setStartDate] = useState(new Date());
-  //const [selectedDoctor, setSelectedDoctor] = useState(null);
+const AppointmentBooking = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
   const [timeSlots, setTimeSlots] = useState([]);
+  const { currentUser } = useAuth();
+  const { Id } = useParams();
 
-  /*useEffect(() => {
-    setTimeSlots(generateTimeSlots(startDate));
-  }, [startDate]);*/
+useEffect(() => {
+  const fetchAvailability = async () => {
+    try {
+      if (!Id) return; // If no doctor is selected, return
+      
+      // Fetch the selected doctor's availability
+      const response = await axios.get(`http://localhost:5000/doctors/${Id}`);
+      const doctorAvailability = response.data.availability;
 
-  // useEffect(() => {
-  //     // Fetch doctor's availability and generate time slots
-  //   const fetchAvailability = async () => {
-  //     try {
-  //       const response = await axios.get(`/doctors/${selectedDoctor._id}`);
-  //       const doctorAvailability = response.data.availability;
-  //       const slots = generateTimeSlots(doctorAvailability);
-  //       setTimeSlots(slots);
-  //     } catch (error) {
-  //       console.error('Error fetching doctor availability:', error);
-  //     }
-  //   };
+      // Find availability for the selected date
+      const selectedDateAvailability = doctorAvailability.find(day => {
+        const dayOfWeek = new Date(selectedDate).toLocaleDateString('en-US', { weekday: 'long' });
+        return day.day === dayOfWeek;
+      });
 
-  //   fetchAvailability();
-  // }, [selectedDoctor]);
-
-  useEffect(() => {
-    const fetchAvailability = async () => {
-      try {
-        // Fetch all doctors
-        const response = await axios.get('http://localhost:5000/doctors');
-        console.log('API Response:', response.data);  // Log the response data
-        const allDoctors = response.data;
-    
-        // Filter time slots based on selected date
-        const slots = filterTimeSlotsByDate(allDoctors, selectedDate);
-        setTimeSlots(slots);
-      } catch (error) {
-        console.error('Error fetching doctors availability:', error);
+      if (!selectedDateAvailability) {
+        // If doctor is not available on the selected date, set time slots to empty array
+        setTimeSlots([]);
+        return;
       }
-    };
 
-    fetchAvailability();
-  }, [selectedDate]);
+      // Generate time slots based on the selected doctor's availability for the selected date
+      const slots = generateTimeSlots([selectedDateAvailability]);
+      setTimeSlots(slots);
+    } catch (error) {
+      console.error('Error fetching doctor availability:', error);
+    }
+  };
+
+  fetchAvailability();
+}, [selectedDate, Id]);
+
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -159,13 +121,13 @@ const AppointmentBooking = ({ selectedDoctor, patientId }) => {
   const handleSubmit = () => {
     alert(`Scheduled to: ${selectedDate.toDateString()} at ${selectedTimeSlot}`);
     console.log(`Scheduled to: ${selectedDate.toDateString()} at ${selectedTimeSlot}`);
-    if (selectedDoctor && selectedTimeSlot) {
+    if (Id && selectedTimeSlot) {
       //prepare data for the appointment booking request
       const data = {
-        doctorId: selectedDoctor._id,
+        doctorId: Id,
         date: selectedDate.toISOString(), // Convert date to ISO string format
         time: selectedTimeSlot,
-        bookedBy: patientId
+        bookedBy: currentUser._id
       };
   
       // Make the appointment booking request

@@ -11,6 +11,14 @@ const doctorSchema = new mongoose.Schema({
     required: true,
     description: 'Name of the doctor'
   },
+  experience: {
+    type: Number,
+    description: "Years of experience"
+  },
+  price: {
+    type: Number,
+    description: "Price per session"
+  },
   specialization: {
     type: String,
     description: 'Specialization of the doctor'

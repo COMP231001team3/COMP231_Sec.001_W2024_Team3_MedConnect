@@ -23,7 +23,7 @@ function NavBar({ handleLogin }) {
         </li>
       );
     } 
-    if (currentUser) {
+    else if (currentUser && currentUser.role === "doctor") {
       return (
         <li className="nav-item">
           <Link className="nav-link" to="/doctorProfile">
@@ -33,7 +33,7 @@ function NavBar({ handleLogin }) {
       );
     }
     return null;
-  };
+  };  
 
   const handleLoginClick = () => {
     navigate("/sign-in"); // Navigate to the login page
