@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-
+import React, { useState, useEffect } from "react";
+import "./listDoctors.css";
+import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function ListDoctors() {
   const [doctors, setDoctors] = useState([]);
@@ -9,34 +9,45 @@ function ListDoctors() {
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    const results = queryParams.get('results');
+    const results = queryParams.get("results");
     if (results) {
       try {
         const decodedResults = JSON.parse(decodeURIComponent(results));
         setDoctors(decodedResults);
       } catch (error) {
         console.error("Decode error: ", error);
-        
       }
     }
-  }, [location.search]); 
+  }, [location.search]);
 
   return (
-    <section className='searchResultSection'>
-      <div className='searchResultDiv'>
-        <div className='resultContent'>
-          {doctors.map((doctor) => (
-            <div key={doctor._id} className="resultItem">
-              <Link to="/doctorProfileForUser">
-
-              </Link>
-              <div>
-                <h3>{doctor.name}</h3>
-                <p> Location: {doctor.address} <br/>Speciality: {doctor.specialization}</p>
-                <p>Rating: {doctor.rating}/5</p>
+    <section className="searchResultSection">
+      <div className="searchResultDiv">
+        <div className="resultContent">
+          {doctors.length > 0 ? (
+            doctors.map((doctor) => (
+              <div key={doctor._id} className="resultItem">
+                <Link
+                  to={{
+                    pathname: `/doctorProfileForUser/${doctor._id}`,
+                    state: { doctorId: doctor._id },
+                  }}
+                >
+                  <h3>{doctor.name}</h3>
+                </Link>
+                <div className="resultInf">
+                  <p>
+                    {" "}
+                    Location: {doctor.address} <br />
+                    Speciality: {doctor.specialization}
+                  </p>
+                  <p>Rating: {doctor.rating}/5</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <div className="no-results">No results found.</div>
+          )}
         </div>
       </div>
     </section>
