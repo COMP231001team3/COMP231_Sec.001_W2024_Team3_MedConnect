@@ -42,7 +42,7 @@ const CalendarWithAppointments = () => {
                         <div key={index} style={{ 
                             padding: '10px', 
                             margin: '5px', 
-                            borderLeft: `5px solid ${appointment.status === 'scheduled' ? 'green' : appointment.status === 'cancelled' ? 'red' : 'blue'}` 
+                            borderLeft: `5px solid ${appointment.reason === 'Regular checkup' ? 'green' : appointment.reason === 'Follow-up' ? 'blue' : 'red'}` 
                         }}>
                             <p>Time: {appointment.time}, Reason: {appointment.reason}, Status: {appointment.status}</p>
                         </div>
