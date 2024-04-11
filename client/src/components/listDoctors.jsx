@@ -25,18 +25,28 @@ function ListDoctors() {
     <section className='searchResultSection'>
       <div className='searchResultDiv'>
         <div className='resultContent'>
-          {doctors.map((doctor) => (
-            <div key={doctor._id} className="resultItem">
-              <Link to="/doctorProfileForUser">
-
-              </Link>
-              <div>
+          {doctors.length > 0 ? (
+            doctors.map((doctor) => (
+              <div key={doctor._id} className="resultItem">
+                <Link
+                  to={{
+                    pathname: `/doctorProfileForUser/${doctor._id}`,
+                    state: { doctorId: doctor._id }
+                  }}
+                >
                 <h3>{doctor.name}</h3>
-                <p> Location: {doctor.address} <br/>Speciality: {doctor.specialization}</p>
-                <p>Rating: {doctor.rating}/5</p>
+                </Link>
+                <div>
+                  <p> Location: {doctor.address} <br/>Speciality: {doctor.specialization}</p>
+                  <p>Rating: {doctor.rating}/5</p>
+                </div>
               </div>
+            ))
+          ) : (
+            <div className="no-results">
+              No results found.
             </div>
-          ))}
+          )}
         </div>
       </div>
     </section>
