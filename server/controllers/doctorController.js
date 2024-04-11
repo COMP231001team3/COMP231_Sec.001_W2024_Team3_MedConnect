@@ -38,9 +38,9 @@ exports.getDoctorByName = async (req, res) => {
 
 exports.searchDoctors = async (req, res) => {
   try {
-    const query = req.query.query; // or use req.query.name, req.query.specialization, etc., depending on your query parameter
+    const query = req.query.query; 
     const doctors = await Doctor.find({
-      // Assuming you're searching by name; adjust as needed
+      
       name: { $regex: query, $options: 'i' }, // Case-insensitive regex search
     });
     res.json(doctors);
