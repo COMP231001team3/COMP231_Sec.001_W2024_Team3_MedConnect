@@ -76,7 +76,7 @@ function DoctorProfileForUser() {
             <h2>{doctor.name}</h2>
           </li>
           <li>Location: {doctor.address}</li>
-          <li>Speciality: {doctor.specialization}</li>
+          <li>Specialization: {doctor.specialization}</li>
           <li>Price: {doctor.price ? doctor.price : "The doctor did not provide a price per session. Call for details."}</li>
           <li>Rating: {doctor.rating ? doctor.rating : "No one rated a doctor yet"}</li>
         </ul>
@@ -99,7 +99,24 @@ function DoctorProfileForUser() {
                 )}
         </div>
       </div>
-
+  
+      {/* Form for leaving a comment */}
+      {currentUser && (
+        <div className="leaveReviewSection">
+          <h3>Leave a Review</h3>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="comment">Comment:</label>
+              <textarea id="comment" value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
+            </div>
+            <div>
+              <label htmlFor="rating">Rating:</label>
+              <input type="number" id="rating" min="1" max="5" value={rating} onChange={(e) => setRating(e.target.value)} />
+            </div>
+            <button type="submit">Submit Review</button>
+          </form>
+        </div>
+      )}
       <div className="reviews">
         <h3>Reviews</h3>
         {reviews.length > 0 ? (
@@ -113,22 +130,6 @@ function DoctorProfileForUser() {
           <p>No reviews available</p>
         )}
       </div>
-
-      {/* Form for leaving a comment */}
-      {currentUser && (
-        <form onSubmit={handleSubmit}>
-          <h3>Leave a Review</h3>
-          <div>
-            <label htmlFor="comment">Comment:</label>
-            <textarea id="comment" value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
-          </div>
-          <div>
-            <label htmlFor="rating">Rating:</label>
-            <input type="number" id="rating" min="1" max="5" value={rating} onChange={(e) => setRating(e.target.value)} />
-          </div>
-          <button type="submit">Submit Review</button>
-        </form>
-      )}
     </section>
   );
 }

@@ -110,22 +110,16 @@
 .uploading {
   margin-top: 40px;
   display: flex;
+  flex-direction: column;
   align-items: center; 
 }
 
+.uploading select,
+.uploading input,
+.uploading button {
+  margin: 10px auto;
+}
+
 .uploading h2{
-  margin-right: 110px; 
-}
-
-
-.dragDropArea {
-  border: 2px dashed #ccc; 
-  padding: 90px 150px;
-  text-align: center;
-  margin-top: 10px;
-  background-color: rgb(225, 224, 224);
-}
-
-.dragDropArea p {
-  margin: 0;
+  margin: 0 auto;
 }

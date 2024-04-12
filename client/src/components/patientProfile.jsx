@@ -11,41 +11,6 @@ import { useAuth } from "../Contexts/authContext";
 Story#4: As a patient, I can see a patient dashboard after logging in. On this page, I can access calendar, view/edit my profile, download/upload documents and manage appointments */
 }
 function PatientProfile() {
-  /*
-  const [file, setFile] = useState(null);
-
-  // Function to handle file upload
-  const handleFileUpload = async (event) => {
-    const selectedFile = event.target.files[0];
-    setFile(selectedFile);
-
-    // Create FormData object to send file
-    const formData = new FormData();
-    formData.append("file", selectedFile);
-
-    try {
-      await axios.post("/upload", formData); 
-      console.log("File uploaded successfully");
-    } catch (error) {
-      console.error("Error uploading file:", error);
-    }
-  };
-
-  // Function to handle file download
-  const handleFileDownload = async () => {
-    try {
-      const response = await axios.get("/download/:patientId/:filename"); 
-      const blob = new Blob([response.data]);
-      const url = window.URL.createObjectURL(blob);
-      localStorage.setItem("downloadedFile", url);
-      // window.open(url, '_blank');
-      console.log("File downloaded:", response.data);
-    } catch (error) {
-      console.error("Error downloading file:", error);
-    }
-  };
-  */
-
   const { currentUser } = useAuth();
   const [patient, setPatient] = useState(null);
   const navigate = useNavigate();
@@ -77,7 +42,7 @@ function PatientProfile() {
 
   const handleMyFiles = () => {
     // Navigate to the my files page
-    navigate("/MyFiles");
+    navigate(`/MyFiles/${patient._id}`);
   };
 
   return (

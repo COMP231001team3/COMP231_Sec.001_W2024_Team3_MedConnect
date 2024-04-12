@@ -22,24 +22,52 @@ function Header() {
     }
   };
 
-  const fetchSearchResults = async (query) => {
-    setIsLoading(true);
-    try {
-      
-      const response = await fetch(`http://localhost:5000/doctors/search?query=${query}`);
-      if (!response.ok) {
-        throw new Error('Search failed');
-      }
-      const data = await response.json();
-      setSearchResults(data);
-      setShowDropdown(true); // Show results
-    } catch (error) {
-      console.error('Search error:', error);
-      setShowDropdown(false);
-    } finally {
-      setIsLoading(false);
+const fetchSearchResults = async (query) => {
+  setIsLoading(true);
+  try {
+    let url;
+    const doctorsResponse = await fetch(`http://localhost:5000/doctors`);
+    if (!doctorsResponse.ok) {
+      throw new Error('Failed to fetch doctors');
     }
-  };
+    const doctors = await doctorsResponse.json();
+    
+    const matchingSpecializations = doctors.filter(doctor => 
+      doctor.specialization && doctor.specialization.toLowerCase().includes(query.trim().toLowerCase())
+    );
+    
+
+    console.log("Matching specializations:", matchingSpecializations);
+
+    if (matchingSpecializations.length > 0) {
+      console.log("Query matches a specialization");
+      // If the query matches any specialization, fetch doctors by specialization
+      url = `http://localhost:5000/doctors/specialization/${encodeURIComponent(query.trim())}`;
+    } else {
+      console.log("Query does not match a specialization");
+      // Otherwise, treat the query as a doctor's name and fetch doctors by name
+      url = `http://localhost:5000/doctors/search?query=${encodeURIComponent(query.trim())}`;
+    }
+    
+    console.log("URL:", url);
+
+    const searchResponse = await fetch(url);
+    if (!searchResponse.ok) {
+      throw new Error('Search failed');
+    }
+    const data = await searchResponse.json();
+    setSearchResults(data);
+    setShowDropdown(true); // Show results
+  } catch (error) {
+    console.error('Search error:', error);
+    setShowDropdown(false);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+
+
 
   // Hide dropdown
   useEffect(() => {

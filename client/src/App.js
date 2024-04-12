@@ -41,7 +41,7 @@ function App() {
             <Route path="/doctorProfileForUser/:Id" element={<DoctorProfileForUser />} />
             <Route path="/receptionistProfile" element={<ReceptionistProfile />} />
             <Route path="/doctorProfile" element={<DoctorProfile />} />
-            <Route path="/MyFiles" element={<UploadingDownloadingFiles />} />
+            <Route path="/MyFiles/:patientId" element={<UploadingDownloadingFiles />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/calendar" element={<CalendarWithAppointments />} />
           </Routes>

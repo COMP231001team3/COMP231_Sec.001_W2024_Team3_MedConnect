@@ -4,19 +4,21 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const path = require('path'); // Import path module
+const fs = require('fs'); // Import fs module
 const Patient = require('../models/patient.model');
 
-
-let storage = multer.diskStorage({
+// Define multer storage configuration
+const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, '../uploads')
+        cb(null, path.join(__dirname, '..', 'uploads')); // Set destination folder
     },
     filename: function (req, file, cb) {
-      let extArray = file.mimetype.split("/");
-      let extension = extArray[extArray.length - 1]; //get the extension of uploaded file
-      cb(null, file.fieldname + '-' + Date.now()+ '.' +extension) //it will provide a filename like datetime.extension
+        let extArray = file.originalname.split(".");
+        let extension = extArray[extArray.length - 1];
+        cb(null, file.fieldname + '-' + Date.now() + '.' + extension);
     }
-  })
+});
 
 const upload = multer({
     storage: storage,
@@ -30,23 +32,22 @@ router.post('/upload', upload.single('file'), async (req, res) => {
             return res.status(400).json({ error: 'No file uploaded' });
         }
 
-        //File uploaded successfully, save file information to patient's documents array
-        const patientId = req.body.patientId;
+        // Extract necessary information from the request
         const { filename, originalname } = req.file;
-        const uploadedAt = new Date();
+        const patientId = req.body.patientId;
 
-        //Update the patient's document array with the new file information
+        // Update patient's document array with the new file information
         const updatedPatient = await Patient.findByIdAndUpdate(patientId, {
             $push: {
                 documents: {
                     type: 'Uploaded File',
                     filename: filename,
                     originalname: originalname,
-                    uploadedAt: uploadedAt
+                    uploadedAt: new Date()
                 }
             },
             new: true
-        })
+        });
 
         if (!updatedPatient) {
             return res.status(404).json({ error: 'Patient not found' });
@@ -78,15 +79,15 @@ router.get('/download/:patientId/:filename', async (req, res) => {
         }
 
         // Construct the file path
-        const filePath = path.join(__dirname, '../uploads', filename);
-
-        // Check if the file exists
-        if (!fs.existsSync(filePath)) {
-            return res.status(404).json({ error: 'File not found' });
-        }
+        const filePath = path.join(__dirname, '..', 'uploads', filename);
 
         // Serve the file for download
-        res.download(filePath, file.originalname);
+        res.download(filePath, file.originalname, (err) => {
+            if (err) {
+                console.error('Error downloading file:', err);
+                res.status(500).json({ error: 'An error occurred while downloading file' });
+            }
+        });
     } catch (error) {
         console.error('Error downloading file:', error);
         res.status(500).json({ error: 'An error occurred while downloading file' });
@@ -95,3 +96,4 @@ router.get('/download/:patientId/:filename', async (req, res) => {
 
 
 module.exports = router;
+

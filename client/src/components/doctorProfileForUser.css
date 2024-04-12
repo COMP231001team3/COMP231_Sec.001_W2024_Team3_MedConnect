@@ -2,14 +2,15 @@
   height: 90px;
   width: 100%;
   margin-top: 70px;
+  text-align: center;
 }
 
 .doctorprofile {
   height: 340px;
   width: 60%;
   display: flex;
- margin-left: 400px;
- margin-top: 70px;
+  margin-left: 400px;
+  margin-top: 70px;
 }
 
 .doctorprofile img{
@@ -24,30 +25,24 @@
   margin-left: 140px;
 }
 
-
 .doctorprofile ul {
   list-style-type: none;
   text-align: left;
   margin-left: 150px;
 }
 
-
-
 .bookAppointment{
   height: auto;
   width: 60%;
   display: flex;
   flex-direction: column; 
-  
   margin-left: 400px;
 }
 
 .bookAppointmentTitle{
   height: 90px;
   width: 100%;
-
 }
-
 
 .bookAppointment p{
   color: white;
@@ -55,69 +50,61 @@
   font-size: 1.1rem;
   height: 60px;
   text-align: center;
-} 
-
-.clinicAddress {
-  height: 650px;
-  width: 30%;
-  margin-left: 400px;
-
 }
 
-
-.clinicAddress ul{
- list-style-type: none;
- text-align: left;
+.reviews{
+  width: 60%;
+  margin: 20px auto;
 }
 
-.clinicAddress h3{
-  text-align: left;
- }
-
- .clinicAddress button{
-  margin-right: 300px;
- }
- 
- .reviews{
-  height: 320px;
-  width: 80%;
-  margin-bottom: 120px;
-  margin-left: 140px;
-  display: flex;
- }
-
- .reviews h3{
+.reviews h3{
   margin-left: 25px;
   margin-top: 0px; 
 }
- 
- .reviews img{
-  height: 80px;
-  width: 70px;
-  margin-left: 60px;
- margin-top: 130px;
- }
 
- .reviews p{
-  height: 80px;
-  width: 70px;
-  margin-left: 60px;
- margin-top: 130px;
- }
-
- .reviews ul{
-  list-style-type: none;
-  margin-left: 60px;
- margin-top: 130px;
- font-size: 1.2rem;
+.reviews div {
+  border: 1px solid #ccc; /* Add border to review cards */
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
-.bookApp{
-  display: flex;
-  margin-top: 100px;
+.reviews p {
+  margin: 5px 0;
 }
 
-.bookAppointment button {
-  align-self: flex-start; 
-  margin-top: 10px; 
+.leaveReviewSection {
+  margin: 0 auto;
+}
+
+.leaveReviewSection form {
+  padding: 20px;
+  width: 40%;
+  margin: 0 auto;
+}
+
+.leaveReviewSection label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.leaveReviewSection textarea,
+.leaveReviewSection input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-color: #3A3E40;
+  border-radius: 8px;
+}
+
+.leaveReviewSection button {
+  padding: 10px 20px;
+  background-color: #87E3C2;
+  color: #3A3E40;
+  border: none;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.leaveReviewSection button:hover {
+  color: black;
 }

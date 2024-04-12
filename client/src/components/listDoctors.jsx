@@ -1,3 +1,4 @@
+/*
 import React, { useState, useEffect } from "react";
 import "./listDoctors.css";
 import { useLocation } from "react-router-dom";
@@ -23,6 +24,14 @@ function ListDoctors() {
   return (
     <section className="searchResultSection">
       <div className="searchResultDiv">
+        <div className="filterButtons">
+          <select>
+            <option value="">Select Specialization</option>
+
+          </select>
+          <button>Sort by Rating (High to Low)</button>
+          <button>Sort by Price (Low to High)</button>
+        </div>
         <div className="resultContent">
           {doctors.length > 0 ? (
             doctors.map((doctor) => (
@@ -55,69 +64,107 @@ function ListDoctors() {
 }
 
 export default ListDoctors;
+*/
 
-/*
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
-import './listDoctors.css';
-import profileImage from './profile.jpg';
-import { Link } from 'react-router-dom';
-
-
-{/* Page Result with the doctor list
-Story#2: As a user, I can see list of doctors, I can sort and filter to search a doctor, select a doctor and see their profile}
- 
+import React, { useState, useEffect } from "react";
+import "./listDoctors.css";
+import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function ListDoctors() {
+  const [doctors, setDoctors] = useState([]);
+  const [filteredDoctors, setFilteredDoctors] = useState([]);
+  const [specializations, setSpecializations] = useState([]);
+  const location = useLocation();
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const results = queryParams.get("results");
+    if (results) {
+      try {
+        const decodedResults = JSON.parse(decodeURIComponent(results));
+        setDoctors(decodedResults);
+        setFilteredDoctors(decodedResults);
+        fetchSpecializations(decodedResults);
+      } catch (error) {
+        console.error("Decode error: ", error);
+      }
+    }
+  }, [location.search]);
+
+  const fetchSpecializations = (doctors) => {
+    const allSpecializations = doctors.map((doctor) => doctor.specialization);
+    const uniqueSpecializations = [...new Set(allSpecializations)];
+    setSpecializations(uniqueSpecializations);
+  };
+
+  const filterDoctorsBySpecialization = (specialization) => {
+    if (specialization === "All") {
+      setFilteredDoctors(doctors);
+    } else {
+      const filtered = doctors.filter(
+        (doctor) => doctor.specialization === specialization
+      );
+      setFilteredDoctors(filtered);
+    }
+  };
+
+  const sortDoctorsByRating = () => {
+    const sorted = [...filteredDoctors].sort((a, b) => b.rating - a.rating);
+    setFilteredDoctors(sorted);
+  };
+
+  const sortDoctorsByPrice = () => {
+    const sorted = [...filteredDoctors].sort((a, b) => a.price - b.price);
+    setFilteredDoctors(sorted);
+  };
+
   return (
-    <section className='searchResultSection'> 
-      <div className='searchResultDiv'>
-        <div className='Filter'>
-        <h3>Filter</h3>
-        <button className="filtro-btn">Condition 1</button>
-        <button className="filtro-btn">Condition 2</button>
-        <button className="filtro-btn">Condition 3</button>
-        <button className="filtro-btn">Condition 4</button>
-        <button className="filtro-btn">Condition 5</button>
+    <section className="searchResultSection">
+      <div className="searchResultDiv">
+        <div className="filterButtons">
+          <select onChange={(e) => filterDoctorsBySpecialization(e.target.value)}>
+            <option value="All">All Specializations</option>
+            {specializations.map((spec) => (
+              <option key={spec} value={spec}>
+                {spec}
+              </option>
+            ))}
+          </select>
+          <button onClick={sortDoctorsByRating}>Sort by Rating (High to Low)</button>
+          <button onClick={sortDoctorsByPrice}>Sort by Price (Low to High)</button>
         </div>
-        <div className='resultContent'>
-          <div className="resultItem">
-          <Link to="/doctorProfileForUser">
-              <img src={profileImage} alt="Imagem de perfil" />
-            </Link>
-            
-              <div>
-                <h3>Pedro Henrique</h3>
-                <p> Location: Calgary <br/>Clinic: Get Well, MyDoc <br/>Speciality: Dermatologist</p>
-                <p>Rating: 4.5/5</p>
+        <div className="resultContent">
+          {filteredDoctors.length > 0 ? (
+            filteredDoctors.map((doctor) => (
+              <div key={doctor._id} className="doctorCard">
+                <Link
+                  to={{
+                    pathname: `/doctorProfileForUser/${doctor._id}`,
+                    state: { doctorId: doctor._id },
+                  }}
+                  className="cardLink"
+                >
+                  <div className="cardContent">
+                    <h3>{doctor.name}</h3>
+                    <p>
+                      Location: {doctor.address} <br />
+                      Speciality: {doctor.specialization}
+                    </p>
+                    <p>Rating: {doctor.rating}/5</p>
+                  </div>
+                </Link>
               </div>
-            </div>
-            <div className="resultItem">
-            <Link to="/doctorProfileForUser">
-              <img src={profileImage} alt="Imagem de perfil" />
-            </Link>
-            <div>
-              <h3>John Doe</h3>
-              <p> Location: Calgary <br/>Clinic: Get Well, MyDoc <br/>Speciality: Dermatologist</p>
-              <p>Rating: 4.5/5</p>
-            </div>
-            </div>
-            <div className="resultItem">
-            <Link to="/doctorProfileForUser">
-              <img src={profileImage} alt="Imagem de perfil" />
-            </Link>
-            <div>
-              <h3>Bruna Silva</h3>
-              <p> Location: Calgary <br/>Clinic: Get Well, MyDoc <br/>Speciality: Dermatologist</p>
-              <p>Rating: 4.5/5</p>
-            </div>
-          </div>
+            ))
+          ) : (
+            <div className="no-results">No results found.</div>
+          )}
         </div>
-        </div>
+      </div>
     </section>
   );
-  }
+}
+
+export default ListDoctors;
 
 
-  export default ListDoctors ;
-*/
