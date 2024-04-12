@@ -14,26 +14,30 @@ function NavBar({ handleLogin }) {
   const { currentUser, logout } = useAuth();
 
   const renderProfileLink = () => {
-    if (currentUser && currentUser.role === "patient") {
-      return (
-        <li className="nav-item">
-          <Link className="nav-link" to="/patientProfile">
-            My Profile
-          </Link>
-        </li>
-      );
-    } 
-    else if (currentUser && currentUser.role === "doctor") {
-      return (
-        <li className="nav-item">
-          <Link className="nav-link" to="/doctorProfile">
-            My Profile
-          </Link>
-        </li>
-      );
+    if (currentUser) {
+      const userRole = currentUser.role;
+  
+      if (userRole === 'doctor') {
+        return (
+          <li className="nav-item">
+            <Link className="nav-link" to="/doctorProfile">
+              My Profile
+            </Link>
+          </li>
+        );
+      } else if (userRole === 'patient') {
+        return (
+          <li className="nav-item">
+            <Link className="nav-link" to="/patientProfile">
+              My Profile
+            </Link>
+          </li>
+        );
+      }
     }
     return null;
-  };  
+  };
+  
 
   const handleLoginClick = () => {
     navigate("/sign-in"); // Navigate to the login page

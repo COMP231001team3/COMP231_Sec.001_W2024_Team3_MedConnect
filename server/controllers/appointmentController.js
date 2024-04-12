@@ -28,8 +28,7 @@ exports.bookAppointment = async (req, res) => {
   
       // Check doctor's availability
       // For simplicity, let's assume availability is an array of time slots
-      const doctorAvailability = getDoctorAvailability(doctorId);
-  
+      const doctorAvailability = await getDoctorAvailability(doctorId);
       // Find an available slot
       const availableSlot = doctorAvailability.find(slot => slot === time);
       if (!availableSlot) {
@@ -56,16 +55,6 @@ exports.bookAppointment = async (req, res) => {
     }
   };
   
-
-// Get all appointments
-// exports.getAppointments = async (req, res) => {
-//     try {
-//         const appointments = await Appointment.find();
-//         res.status(200).json({ success: true, data: appointments });
-//     } catch (error) {
-//         res.status(500).json({ success: false, error: error.message });
-//     }
-// };
 
 // Get appointments by date
 exports.getAppointments = async (req, res) => {

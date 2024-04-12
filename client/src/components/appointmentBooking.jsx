@@ -129,9 +129,9 @@ useEffect(() => {
         time: selectedTimeSlot,
         bookedBy: currentUser._id
       };
-  
+      console.log(data);
       // Make the appointment booking request
-      axios.post('appointments/book', data)
+      axios.post('http://localhost:5000/appointments/book', data)
         .then(response => {
           // Handle successful appointment booking
           console.log('Appointment booked successfully:', response.data);

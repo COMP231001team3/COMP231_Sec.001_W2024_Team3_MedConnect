@@ -4,11 +4,12 @@ import "./patientProfile.css";
 import profileImage from "./profile.jpg";
 import axios from "axios";
 import { useAuth } from "../Contexts/authContext";
+import { useNavigate } from "react-router-dom";
 
 function DoctorProfile() {
   const { currentUser } = useAuth();
   const [doctor, setDoctor] = useState(null);
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDoctorData = async () => {
@@ -29,6 +30,15 @@ function DoctorProfile() {
   if (!doctor) {
     return <div>Loading...</div>;
   }
+
+  const handleCalendar = () => {
+    // Navigate to the calendar page
+    navigate(`/calendar/${currentUser._id}`);
+  };
+
+  const handleAppointmentsHistory = () => {
+    navigate(`/${currentUser._id}/patients`); // Redirect to the list of patients
+  };
 
   return (
     <section className="patientProfile">
@@ -56,8 +66,8 @@ function DoctorProfile() {
           </div>
           <div className="options">
             <button className="btn">View and Edit Profile</button>
-            <button className="btn">Calendar</button>
-            <button className="btn">Appointments History</button>
+            <button className="btn" onClick={handleCalendar}>Calendar</button>
+            <button className="btn" onClick={handleAppointmentsHistory}>Appointments History</button>
           </div>
         </div>
       </div>

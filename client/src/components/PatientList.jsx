@@ -1,19 +1,34 @@
-import React from 'react';
-import PatientListItem from './PatientListItem';
+// Iuliia
+import React, { useEffect, useState } from 'react';
+import axios from 'axios'; 
+import { useParams, Link } from "react-router-dom";
 
-const PatientList = ({ patients, onPatientClick }) => {
+const AssignedPatientsPage = () => {
+  const [assignedPatients, setAssignedPatients] = useState([]);
+  const { Id } = useParams();
+
+  useEffect(() => {
+    const fetchAssignedPatients = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/doctors/${Id}/patients`);
+        setAssignedPatients(response.data);
+      } catch (error) {
+        console.error('Error fetching assigned patients:', error);
+      }
+    };
+
+    fetchAssignedPatients();
+  }, [Id]);
+
+  // Render the assigned patients (e.g., in a table)
+
   return (
     <div>
-      <h2>List of Patients</h2>
-      {patients.map(patient => (
-        <PatientListItem
-          key={patient.id}
-          patient={patient}
-          onClick={onPatientClick}
-        />
-      ))}
+      <h1>Assigned Patients</h1>
+      {/* Render the assigned patients here */}
     </div>
   );
 };
 
-export default PatientList;
+export default AssignedPatientsPage;
+

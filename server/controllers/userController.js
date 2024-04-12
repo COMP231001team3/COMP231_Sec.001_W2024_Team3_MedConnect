@@ -113,9 +113,17 @@ exports.loginUser = async (req, res) => {
     }
 };
 
+
   
   // User logout (optional)
   exports.logoutUser = (req, res) => {
-    // Implement logout logic (e.g., invalidate token)
-    res.status(200).json({ message: 'Logout successful' });
+    try {
+        // Clear token from client-side storage (e.g., localStorage)
+        localStorage.removeItem('token');
+
+        res.status(200).json({ message: 'Logout successful' });
+      } catch (error) {
+        console.error('Error logging out:', error);
+        res.status(500).json({ message: 'Logout failed' });
+      }
   };

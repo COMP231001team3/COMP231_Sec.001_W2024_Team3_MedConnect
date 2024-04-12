@@ -16,6 +16,8 @@ import DoctorProfileForUser from './components/doctorProfileForUser.jsx';
 import Logout from './components/logout.jsx';
 import CalendarWithAppointments from './components/calendar.jsx';
 import UploadingDownloadingFiles from './components/uploadingDownloadingFiles.jsx';
+import PatientList from './components/PatientList.jsx';
+import PatientListItem from './components/PatientListItem.jsx';
 
 function App() {
   const [token, setToken] = useState('');
@@ -29,7 +31,7 @@ function App() {
     <AuthProvider>
       <div className="App">
         <Router>
-          <NavBar />
+          <NavBar/>
           <Header />
           <Routes>
             <Route path="/sign-in" element={<Login handleLogin={handleLogin}/>} />
@@ -43,7 +45,9 @@ function App() {
             <Route path="/doctorProfile" element={<DoctorProfile />} />
             <Route path="/MyFiles/:patientId" element={<UploadingDownloadingFiles />} />
             <Route path="/logout" element={<Logout />} />
-            <Route path="/calendar" element={<CalendarWithAppointments />} />
+            <Route path="/calendar/:Id" element={<CalendarWithAppointments />} />
+            <Route path='/:Id/patients' element={<PatientList/>} />
+            <Route path='/:Id/patients/patient' element={<PatientListItem />} />
           </Routes>
           <Footer />
         </Router>

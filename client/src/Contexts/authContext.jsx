@@ -50,39 +50,38 @@ export function AuthProvider({ children }) {
     }
   };
 
-  // Fetch user data based on the token and email
-  async function fetchUserData(token, email) {
-    try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      };
+// Fetch user data based on the token and email
+async function fetchUserData(token, email) {
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    };
 
-      // Fetch patient data
+    // First, try fetching patient data
+    try {
       const patientResponse = await axios.get(`http://localhost:5000/patients/email/${email}`, config);
       if (patientResponse.status === 200) {
         return patientResponse.data; // Assuming the response contains patient data
-      } else {
-        // If patient data not found, fetch doctor data
-      const doctorResponse = await axios.get(`http://localhost:5000/doctors/email/${email}`, config);
-      if (doctorResponse.status === 200) {
-        return doctorResponse.data; // Assuming the response contains doctor data
       }
-      }
-
-      // If patient data not found, fetch doctor data
-      const doctorResponse = await axios.get(`http://localhost:5000/doctors/email/${email}`, config);
-      if (doctorResponse.status === 200) {
-        return doctorResponse.data; // Assuming the response contains doctor data
-      }
-
-      throw new Error('User data not found');
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-      throw error;
+    } catch (patientError) {
+      // If patient data not found, log the error and proceed to fetch doctor data
+      console.error('Error fetching patient data:', patientError);
     }
+
+    // Fetch doctor data
+    const doctorResponse = await axios.get(`http://localhost:5000/doctors/email/${email}`, config);
+    if (doctorResponse.status === 200) {
+      return doctorResponse.data; // Assuming the response contains doctor data
+    }
+
+    throw new Error('User data not found');
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    throw error;
   }
+}
 
   const contextValue = {
     currentUser,
